@@ -23,7 +23,7 @@ jobs:
         run: pip install -r tooling/requirements.txt
       - name: Initialize repositories
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.OMNI_REPO_READONLY }}
         run: |
           python tooling/sync_repos.py init --org ${{ github.repository_owner }} --method ${{ inputs.method }}
       - name: Commit changes
