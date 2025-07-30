@@ -12,6 +12,5 @@ Juxtarepose places GitHub repository snapshots **side‑by‑side**: static and 
 
 ---
 
-*Juxtapose*: to place side by side for comparison (*especially contrasting*)
+The term **"juxtapose"** traces its lineage to the Latin **iuxta**, meaning “beside” or “very near,” and the French **poser**, meaning “to place.” Together, they form a term that literally signifies "to place side by side." While the noun **"juxtaposition"** entered English usage as early as the 17th century, around the 1660s, the verb **"juxtapose"** emerged later, crafted through linguistic back-formation around 1826. Since its inception, **juxtapose** has been embraced extensively within literature, art, and design as a sophisticated means of highlighting contrasts or drawing comparisons by thoughtfully positioning elements in close proximity.
 
-*Repose*: a state of rest or being laid to rest in place.
