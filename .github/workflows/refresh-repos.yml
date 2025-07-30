@@ -11,15 +11,30 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh jq
+      - name: Clone repos from repos.txt
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          mkdir -p repos
+          while IFS= read -r repo || [ -n "$repo" ]; do
+            if [[ -z "$repo" || "$repo" =~ ^# ]]; then
+              continue
+            fi
+            echo "Cloning $OWNER/$repo into repos/$repo"
+            gh repo clone "${OWNER}/${repo}" "repos/${repo}" -- --depth 1
+          done < repos.txt
       - uses: actions/setup-python@v4
         with:
           python-version: '3.x'
       - name: Install dependencies
         run: pip install -r tooling/requirements.txt
       - name: Refresh repos.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.OMNI_READONLY }}
-        run: python tooling/sync_repos.py refresh --org ${{ github.repository_owner }}
+        run: python tooling/sync_repos.py refresh
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"

@@ -2,11 +2,6 @@ name: Init Repository sync
 
 on:
   workflow_dispatch:
-    inputs:
-      method:
-        description: 'clone method: shadow, submodule or subtree'
-        required: true
-        default: shadow
 
 permissions:
   contents: write
@@ -54,10 +49,7 @@ jobs:
         run: pip install -r tooling/requirements.txt
 
       - name: Initialize repositories
-        run: |
-          METHOD="${{ github.event.inputs.method || 'shadow' }}"
-          python tooling/sync_repos.py init \
-            --method "$METHOD"
+        run: python tooling/sync_repos.py init
 
       - name: Commit & push changes
         env:
