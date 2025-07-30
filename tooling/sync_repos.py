@@ -14,18 +14,43 @@ import os
 import subprocess
 from typing import List, Dict, Optional
 
-import requests
+from urllib.error import HTTPError
+from urllib.request import Request, urlopen
 
 # Base URL for all GitHub REST API calls.
 API_BASE = "https://api.github.com"
 
-def github_request(url: str, token: str, timeout: int = 10):
+class SimpleResponse:
+    """Minimal response object mimicking ``requests.Response``."""
+
+    def __init__(self, status_code: int, data: dict):
+        self.status_code = status_code
+        self._data = data
+
+    def json(self) -> dict:
+        return self._data
+
+    def raise_for_status(self) -> None:
+        if not (200 <= self.status_code < 300):
+            raise HTTPError(None, self.status_code, "HTTP error", None, None)
+
+
+def github_request(url: str, token: str, timeout: int = 10) -> SimpleResponse:
     """Perform an authenticated GET request to the GitHub API."""
     headers = {
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github+json",
     }
-    return requests.get(url, headers=headers, timeout=timeout)
+    req = Request(url, headers=headers)
+    try:
+        with urlopen(req, timeout=timeout) as resp:
+            status = resp.status
+            data = json.loads(resp.read().decode())
+    except HTTPError as e:
+        status = e.code
+        body = e.read().decode() if e.fp else ""
+        data = json.loads(body) if body else {}
+    return SimpleResponse(status, data)
 
 def get_repos(org: str, token: str) -> List[Dict]:
     """Return a list of all repositories in the organisation."""
