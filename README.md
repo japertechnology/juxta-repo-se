@@ -27,10 +27,10 @@ The same steps can be triggered via the **Init repository sync** workflow (`init
 
 | Workflow | When to run | Purpose |
 |----------|-------------|---------|
-| **init-repos** | Once at repository creation or after cleaning submodules | Clones every org repository and writes `repos.json`. |
-| **refresh-repos** | Whenever you need an updated manifest | Regenerates `repos.json` without touching existing checkouts. |
-| **org-ci** | Reusable workflow for each child repo | Runs lint, test and optional publish steps. |
-| **codeql** | Periodically or before releases | Performs static analysis for security issues. |
+| [**init-repos**](.github/workflows/init-repos.yml) | Once at repository creation or after cleaning submodules | Clones every org repository and writes `repos.json`. |
+| [**refresh-repos**](.github/workflows/refresh-repos.yml) | Whenever you need an updated manifest | Regenerates `repos.json` without touching existing checkouts. |
+| [**org-ci**](.github/workflows/org-ci.yml) | Reusable workflow for each child repo | Runs lint, test and optional publish steps. |
+| [**codeql**](.github/workflows/codeql.yml) | Periodically or before releases | Performs static analysis for security issues. |
 
 ### Suggested order
 
