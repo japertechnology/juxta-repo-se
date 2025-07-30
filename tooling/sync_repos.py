@@ -18,13 +18,13 @@ import requests
 # Base URL for all GitHub REST API calls.
 API_BASE = "https://api.github.com"
 
-def github_request(url: str, token: str):
+def github_request(url: str, token: str, timeout: int = 10):
     """Perform an authenticated GET request to the GitHub API."""
     headers = {
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github+json",
     }
-    return requests.get(url, headers=headers)
+    return requests.get(url, headers=headers, timeout=timeout)
 
 def get_repos(org: str, token: str) -> List[Dict]:
     """Return a list of all repositories in the organisation."""
