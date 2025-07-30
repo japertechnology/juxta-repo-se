@@ -30,18 +30,18 @@ jobs:
           while IFS= read -r repo || [ -n "$repo" ]; do
             [[ -z "$repo" || "$repo" =~ ^\s*# ]] && continue
 
-            # Build the raw HTTPS URL (with .git)
+            # Build the raw HTTPS URL
             if [[ "$repo" =~ ^https?:// ]]; then
               raw="$repo"
             else
-              raw="https://github.com/${repo}.git"
+              raw="https://github.com/${repo}"
             fi
 
             # Inject the token into the URL for auth
             auth="${raw/https:\/\//https:\/\/x-access-token:${GITHUB_TOKEN}@}"
 
             # Derive folder name & clone
-            name=$(basename "$raw" .git)
+            name=$(basename "$raw")
             echo "Cloning $raw → redos/$name"
             git clone --depth 1 "$auth" "redos/$name"
           done < repos.txt
