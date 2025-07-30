@@ -6,15 +6,16 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   clone:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
 
     steps:
-      - name: Checkout this workflow repo
+      - name: Checkout this repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -23,25 +24,31 @@ jobs:
       - name: Create redos directory
         run: mkdir -p redos
 
-      - name: Read repos.txt and shallow‑clone each with token
+      - name: Read and shallow‑clone each repo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           while IFS= read -r repo || [ -n "$repo" ]; do
-            [[ -z "$repo" || "$repo" =~ ^\s*# ]] && continue
+            # Trim whitespace and skip empty/comment lines
+            repo="${repo##*( )}"
+            repo="${repo%%*( )}"
+            [[ -z "$repo" || "$repo" =~ ^# ]] && continue
 
-            # Build the raw HTTPS URL
+            # Build HTTPS URL and ensure .git suffix
             if [[ "$repo" =~ ^https?:// ]]; then
-              raw="$repo"
+              url="$repo"
             else
-              raw="https://github.com/${repo}"
+              url="https://github.com/$repo.git"
             fi
 
-            # Inject the token into the URL for auth
-            auth="${raw/https:\/\//https:\/\/x-access-token:${GITHUB_TOKEN}@}"
+            # Inject token for authentication
+            auth_url="${url/https:\/\//https:\/\/x-access-token:${GITHUB_TOKEN}@}"
 
-            # Derive folder name & clone
-            name=$(basename "$raw")
-            echo "Cloning $raw → redos/$name"
-            git clone --depth 1 "$auth" "redos/$name"
+            # Derive directory name and clone
+            dir="$(basename "$url" .git)"
+            echo "Cloning $url → redos/$dir"
+            git clone --depth 1 "$auth_url" "redos/$dir" || {
+              echo "❌ Failed to clone $repo"
+              continue
+            }
           done < repos.txt
