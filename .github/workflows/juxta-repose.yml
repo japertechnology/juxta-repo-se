@@ -1,4 +1,4 @@
-name: CLONE
+name: juxta-repose
 
 on:
   workflow_dispatch:
