@@ -1,16 +1,14 @@
 # juxtarepose
 
-Juxtarepose places GitHub repository snapshots **side‑by‑side**: static and untouched—for **AI-powered comparison**, with no merges or Git history overhead.
+"JuxtaRepose" blends juxta‑ (Latin iuxta, “beside” or “near”) from which juxtapose (“to place side by side”) derives, with repose (from Latin reposāre, meaning “to rest”). Together, the name elegantly evokes code repositories resting side by side, untouched and ready for AI-powered comparison.
 
----
+It perfectly encapsulates this tool’s ethos: fresh GitHub snapshots aligned in parallel repose, enabling focused analysis without merging or history overhead.
 
 ## Quick Start
 
-1. Fork and clone this repository.
-2. Create a GitHub token with read permissions and save it as the `JUXTAREPOSE` secret.
-3. Trigger the [**JuxtaRepose** workflow](.github/workflows/JuxtaRepose.yml) to process repositories listed in `.GitHub/JuxtaRepose.txt`.
-
----
-
-The term **"juxtapose"** traces its lineage to the Latin **iuxta**, meaning “beside” or “very near,” and the French **poser**, meaning “to place.” Together, they form a term that literally signifies "to place side by side." While the noun **"juxtaposition"** entered English usage as early as the 17th century, around the 1660s, the verb **"juxtapose"** emerged later, crafted through linguistic back-formation around 1826. Since its inception, **juxtapose** has been embraced extensively within literature, art, and design as a sophisticated means of highlighting contrasts or drawing comparisons by thoughtfully positioning elements in close proximity.
-
+1. **Fork** this repository on GitHub, then **clone** it locally to your machine.
+2. Generate a **GitHub token** with **read-only repository** access and save it under **`JUXTAREPOSE`** in your repository’s **Actions secrets**.
+3. Open `.GitHub/JuxtaRepose.txt`, and add each target repository on its own line using the format: `owner/repository`.
+4. Trigger the [**JuxtaRepose** workflow](.github/workflows/JuxtaRepose.yml) to fetch and arrange those snapshots into the `repository/` directory.
+5. Retrigger to refresh.
+ 
