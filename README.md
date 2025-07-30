@@ -21,6 +21,8 @@ To include repos using git subtree instead of submodules add `--subtree`:
 GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org <org-name> --subtree
 ```
 
+You can also run the same initialization via the `init-repos` workflow.
+
 ### Refreshing `repos.json`
 
 `repos.json` can be updated manually with:
@@ -33,6 +35,7 @@ Run the `refresh-repos` workflow manually whenever you need to update `repos.jso
 
 ### Manual workflows
 
-Workflows in `.github/workflows` handle tasks like dependency updates and
-security scanning. Trigger these workflows manually whenever maintenance is
-required.
+Workflows in `.github/workflows` handle tasks like initializing and refreshing
+repository references, dependency updates and security scanning. Trigger the
+`init-repos` or `refresh-repos` workflows as needed, along with any other
+maintenance jobs.
