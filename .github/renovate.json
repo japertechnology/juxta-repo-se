@@ -1,5 +1,0 @@
-{
-  "extends": ["config:recommended"],
-  "prHourlyLimit": 2,
-  "prConcurrentLimit": 10
-}
