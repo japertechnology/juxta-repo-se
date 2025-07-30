@@ -21,8 +21,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Create redos directory
-        run: mkdir -p redos
+      - name: Create repository directory
+        run: mkdir -p repository
 
       - name: Read and shallow‑clone each repo
         env:
@@ -41,8 +41,8 @@ jobs:
 
             auth_url="${url/https:\/\//https:\/\/x-access-token:${GITHUB_TOKEN}@}"
             dir="$(basename "$url" .git)"
-            echo "Cloning $url → redos/$dir"
-            git clone --depth 1 "$auth_url" "redos/$dir" || {
+            echo "Cloning $url → repository/$dir"
+            git clone --depth 1 "$auth_url" "repository/$dir" || {
               echo "❌ Failed to clone $repo"
               continue
             }
@@ -52,10 +52,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add redos
+          git add repository
           if git diff --cached --quiet; then
             echo "✨ No changes to commit"
           else
-            git commit -m "Add shallow clones in redos/"
+            git commit -m "Add shallow clones in repository/"
             git push
           fi
