@@ -1,0 +1,2 @@
+spark-validated-selfie
+AWS-LAMBDA-NODEJS-CATCH-ALL
