@@ -2,15 +2,11 @@
 
 The repository collects every repository in your organisation so that automation tools and AI assistants can reason across the entire codebase.
 
----
-
 ## Quick start
 
 1. **Clone this repo**.
 2. Generate a GitHub token with permission to read your organisation’s repositories and store it as a `OMNI_READONLY` secret.
 3. Run the Workflows.
-
----
 
 ## Workflows
 
@@ -30,8 +26,6 @@ The repository collects every repository in your organisation so that automation
 
 Dependabot and Renovate are configured to keep dependencies fresh. Trigger their workflows or run `npx renovate` locally for bulk updates.
 
----
-
 ## How it works
 
 `tooling/sync_repos.py` drives the synchronisation process:
@@ -43,7 +37,5 @@ Dependabot and Renovate are configured to keep dependencies fresh. Trigger their
 Both the `init-repos` and `refresh-repos` workflows invoke this script. When running locally, set `GITHUB_TOKEN` in your environment. GitHub workflows use the `OMNI_READONLY` secret to populate this variable.
 
 The generated `repos` directory contains a folder per repository. Shadow clones and submodules use shallow clones for speed, while subtrees copy files directly. `repos.json` captures repository names, SSH URLs, default branches and latest release tags so other tooling has a single source of truth.
-
----
 
 Additional documentation lives in the [docs](docs/) directory, including [Renovate usage](docs/RENOVATE.md).
