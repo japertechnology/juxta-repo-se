@@ -9,6 +9,13 @@ It captures the latest GitHub snapshots of specified repositories, places them s
 3. Open `.github/juxtarepose.txt`, and add each target repository on its own line using the format: `owner/repository`.
 4. Trigger the [**juxtarepose-arrange**](.github/workflows/juxtarepose-arrange.yml) GitHub Workflow to fetch and arrange `.github/juxtarepose.txt` respoitory snapshots into the `repository/` directory.
 5. Trigger the [**juxtarepose-clear**](.github/workflows/juxtarepose-clear.yml) GitHub Workflow to remove the `repository/` directory.
+
+## Running the workflows
+
+1. In your fork on GitHub, open the **Actions** tab.
+2. Select either **juxtarepose-arrange** or **juxtarepose-clear** in the sidebar and click **Run workflow**.
+3. **juxtarepose-arrange** clones the repositories listed in `.github/juxtarepose.txt` into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
+4. **juxtarepose-clear** simply deletes the `repository/` directory.
  
 ---
 
