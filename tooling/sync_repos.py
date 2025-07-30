@@ -11,7 +11,6 @@ import os
 import subprocess
 from typing import Dict, List
 
-
 def build_repo_entry(path: str) -> Dict[str, str | None]:
     """Return repository details derived from the local clone."""
     name = os.path.basename(path)
