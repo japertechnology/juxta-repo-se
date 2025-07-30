@@ -1,66 +1,61 @@
-# JAPER-GITHUB-SYNC
+# JAPER GitHub Sync
 
 [![CodeQL](https://github.com/<org>/<repo>/actions/workflows/codeql.yml/badge.svg)](https://github.com/<org>/<repo>/actions/workflows/codeql.yml)
 [![Dependabot Status](https://img.shields.io/github/dependabot/alerts/<org>/<repo>)](https://github.com/<org>/<repo>/security/dependabot)
 
-This repository aggregates all GitHub repositories for an account into a single view so an AI assistant can reason across the entire library.
+`JAPER-GITHUB-SYNC` collects every repository in your organisation so that automation tools and AI assistants can reason across the entire codebase.
 
-## Usage
+---
 
-### Initial setup
+## Quick start
 
-Run the sync script to add every repository from your organisation as git submodules (shallow cloned):
+1. **Clone this repo** and install [Python 3](https://www.python.org/) and [Git](https://git-scm.com/).
+2. Generate a GitHub token with permission to read your organisation’s repositories.
+3. Run the initial sync to pull in all repositories as submodules:
 
-```bash
-GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org <org-name>
-```
+   ```bash
+   GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org <org-name>
+   ```
+   
+   Add `--subtree` if you prefer Git subtrees over submodules.
+4. Commit the changes so the `repos/` folder and `repos.json` are tracked.
 
-To include repos using git subtree instead of submodules add `--subtree`:
+The same steps can be triggered via the **Init repository sync** workflow (`init-repos.yml`).
 
-```bash
-GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org <org-name> --subtree
-```
+---
 
-You can also run the same initialization via the `init-repos` workflow.
+## Workflows
 
-### Refreshing `repos.json`
+| Workflow | When to run | Purpose |
+|----------|-------------|---------|
+| **init-repos** | Once at repository creation or after cleaning submodules | Clones every org repository and writes `repos.json`. |
+| **refresh-repos** | Whenever you need an updated manifest | Regenerates `repos.json` without touching existing checkouts. |
+| **org-ci** | Reusable workflow for each child repo | Runs lint, test and optional publish steps. |
+| **codeql** | Periodically or before releases | Performs static analysis for security issues. |
 
-`repos.json` can be updated manually with:
+### Suggested order
 
-```bash
-GITHUB_TOKEN=<token> python tooling/sync_repos.py refresh --org <org-name>
-```
+1. **init-repos** – Populate the `repos/` directory with submodules or subtrees and create `repos.json`.
+2. **refresh-repos** – Run as needed to keep `repos.json` in sync with GitHub.
+3. **org-ci** – Apply this reusable workflow in individual repositories to enforce consistent CI.
+4. **codeql** – Schedule or dispatch for organisation-wide security scanning.
 
-Run the `refresh-repos` workflow manually whenever you need to update `repos.json`.
+Dependabot and Renovate are configured to keep dependencies fresh. Trigger their workflows or run `npx renovate` locally for bulk updates.
 
-### Manual workflows
-
-Workflows in `.github/workflows` handle tasks like initializing and refreshing
-repository references, dependency updates and security scanning. Trigger the
-`init-repos` or `refresh-repos` workflows as needed, along with any other
-maintenance jobs.
+---
 
 ## How it works
 
-The `tooling/sync_repos.py` script drives the synchronisation process. At a high
-level the tool performs the following steps:
+`tooling/sync_repos.py` drives the synchronisation process:
 
-1. Calls the GitHub REST API to enumerate every repository in your organisation.
-2. Either adds each repository as a **submodule** (default) or as a **subtree**
-   if you pass the `--subtree` flag.
-3. Writes summary information about each repository to `repos.json` so that
-   other tooling can consume a consistent manifest.
+1. The script calls the GitHub API to list every repository in the organisation.
+2. Each repository is added either as a **submodule** (default) or as a **subtree** when `--subtree` is supplied.
+3. Metadata about each repository is written to `repos.json`.
 
-Running the script requires that the environment variable `GITHUB_TOKEN` is set
-with a token that has permission to read organisation repositories. The same
-logic is used by the `init-repos` and `refresh-repos` workflows.
+Both the `init-repos` and `refresh-repos` workflows invoke this script. Ensure `GITHUB_TOKEN` is set in your environment or secrets when running it manually.
 
-When a repository is initialised a `repos` directory is created. Inside it you
-will find a folder for each repository. Submodules are shallow cloned to keep
-the checkout lightweight, while subtrees copy the contents directly into the
-`repos` directory.
+The generated `repos` directory contains a folder per repository. Submodules are shallow-cloned for speed, while subtrees copy files directly. `repos.json` captures repository names, SSH URLs, default branches and latest release tags so other tooling has a single source of truth.
 
-`repos.json` contains fields such as the repository name, its SSH URL, default
-branch and the latest release tag. This file is regenerated on every run so it
-always reflects the current state of the organisation.
+---
 
+Additional documentation lives in the [docs](docs/) directory, including [Renovate usage](docs/RENOVATE.md) and the comprehensive [design document](DESIGN.md).
