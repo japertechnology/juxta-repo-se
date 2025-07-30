@@ -1,4 +1,4 @@
-name: Init Repository sync
+name: Init Repository Sync
 
 on:
   workflow_dispatch:
@@ -35,10 +35,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # fall back to 'shadow' if somehow empty
+          # Determine the owner (org or user) from the repo slug "owner/name"
+          OWNER="${GITHUB_REPOSITORY%/*}"
+          # Fallback to 'shadow' if somehow the input is empty
           METHOD="${{ github.event.inputs.method || 'shadow' }}"
           python tooling/sync_repos.py init \
-            --org "${{ github.repository_owner }}" \
+            --org "$OWNER" \
             --method "$METHOD"
 
       - name: Commit & push changes
