@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write   # allow this job to push snapshots back
 
 defaults:
   run:
@@ -15,51 +15,61 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1 – Check out the workflow repository itself
       - name: Checkout this repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
           persist-credentials: true
 
+      # 2 – Normalise line endings in the repo list
       - name: Ensure .github/CLONE.txt has Unix line endings
         run: |
           if command -v dos2unix &> /dev/null; then dos2unix .github/CLONE.txt
           else sed -i 's/\r$//' .github/CLONE.txt; fi
 
-      - name: Create repository directory
-        run: mkdir -p repository
+      # 3 – Create (or clean) the snapshot directory
+      - name: Prepare snapshot directory
+        run: |
+          mkdir -p repository
+          rm -rf repository/*   # start from a clean slate
 
-      - name: Read and shallow‑clone each repo
+      # 4 – Read the list and shallow‑clone each repo
+      - name: Shallow‑clone every repo in CLONE.txt
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MULTI_REPO_TOKEN: ${{ secrets.OMNI_READONLY }}
         run: |
           set -euo pipefail
-          shopt -s extglob
-
-          echo "Using .github/CLONE.txt from $(pwd)"
-          sed -n '1,20p' .github/CLONE.txt
-
           while IFS= read -r repo || [[ -n $repo ]]; do
+            # Trim whitespace and ignore blanks / comments
             repo="${repo//$'\r'/}"
-            repo="${repo##*( )}"
-            repo="${repo%%*( )}"
+            repo="${repo##*( )}"; repo="${repo%%*( )}"
+            [[ -z "$repo" || "$repo" =~ ^# ]] && continue
 
-            echo "➤ raw repo: '$repo'"
-            [[ -z "$repo" || "$repo" =~ ^# ]] && { echo "  → skipping"; continue; }
+            # Build full HTTPS URL (accepts owner/name or full URL)
+            if [[ $repo =~ ^https?:// ]]; then
+              url="$repo"
+            else
+              url="https://github.com/$repo.git"
+            fi
 
-            if [[ "$repo" =~ ^https?:// ]]; then url="$repo"
-            else url="https://github.com/$repo.git"; fi
+            # Inject PAT for authentication
+            auth_url="${url/https:\/\//https:\/\/x-access-token:${MULTI_REPO_TOKEN}@}"
 
-            auth_url="${url/https:\/\//https:\/\/x-access-token:${GITHUB_TOKEN}@}"
-            dir="$(basename "$url" .git)"
-            echo "Shallow-cloning $url → repository/$dir"
-            git clone --depth 1 "$auth_url" "repository/$dir" || {
-              echo "❌ Failed to clone $repo"; continue; }
+            # Clone into repository/<repo‑name>
+            target="repository/$(basename "$url" .git)"
+            echo "➤ Cloning $url → $target"
+            git clone --depth 1 "$auth_url" "$target" || {
+              echo "❌ Failed to clone $repo"
+              continue
+            }
           done < .github/CLONE.txt
 
+      # 5 – Strip Git metadata so only a snapshot remains
       - name: Remove Git metadata from clones
         run: rm -rf repository/*/.git
 
+      # 6 – Commit the fresh snapshots back to this repo
       - name: Commit cloned repos
         run: |
           git config user.name "github-actions[bot]"
