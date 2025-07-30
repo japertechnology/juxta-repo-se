@@ -1,6 +1,6 @@
-# Juxta‑Repose
+# juxtarepose
 
-Juxta‑Repose places GitHub repository snapshots **side‑by‑side**—static and untouched—for **AI-powered comparison**, with no merges or Git history overhead.
+Juxtarepose places GitHub repository snapshots **side‑by‑side**: static and untouched—for **AI-powered comparison**, with no merges or Git history overhead.
 
 ---
 
