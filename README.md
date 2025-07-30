@@ -24,7 +24,7 @@ The repository collects every repository in your organisation so that automation
 3. **org-ci** – Apply this reusable workflow in individual repositories to enforce consistent CI.
 4. **codeql** – Schedule or dispatch for organisation-wide security scanning.
 
-Dependabot and Renovate are configured to keep dependencies fresh. Trigger their workflows or run `npx renovate` locally for bulk updates.
+Dependabot is configured to keep dependencies fresh.
 
 ## How it works
 
@@ -38,4 +38,4 @@ Both the `init-repos` and `refresh-repos` workflows invoke this script. When run
 
 The generated `repos` directory contains a folder per repository. Shadow clones and submodules use shallow clones for speed, while subtrees copy files directly. `repos.json` captures repository names, SSH URLs, default branches and latest release tags so other tooling has a single source of truth.
 
-Additional documentation lives in the [docs](docs/) directory, including [Renovate usage](docs/RENOVATE.md).
+Additional documentation lives in the [docs](docs/) directory.
