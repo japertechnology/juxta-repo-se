@@ -1,19 +1,30 @@
+name: Init Repository sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      method:
+        description: 'clone method: shadow, submodule or subtree'
+        required: true
+        default: shadow
+
 permissions:
   contents: write
-
-on: workflow_dispatch
 
 jobs:
   init:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
           submodules: recursive
 
-      - uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -22,13 +33,17 @@ jobs:
 
       - name: Initialize repositories
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # must be a write‑enabled token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # fall back to 'shadow' if somehow empty
+          METHOD="${{ github.event.inputs.method || 'shadow' }}"
           python tooling/sync_repos.py init \
             --org "${{ github.repository_owner }}" \
-            --method "${{ inputs.method }}"
+            --method "$METHOD"
 
       - name: Commit & push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
