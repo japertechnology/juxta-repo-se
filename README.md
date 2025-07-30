@@ -57,4 +57,4 @@ The generated `repos` directory contains a folder per repository. Shadow clones 
 
 ---
 
-Additional documentation lives in the [docs](docs/) directory, including [Renovate usage](docs/RENOVATE.md) and the comprehensive [design document](DESIGN.md).
+Additional documentation lives in the [docs](docs/) directory, including [Renovate usage](docs/RENOVATE.md).
