@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<AppInstaller xmlns="http://schemas.microsoft.com/appx/appinstaller/2018"
-             Uri="https://example.com/releases/JaperApp.appinstaller"
-             Version="1.0.0.0">
-  <MainPackage Name="JaperApp" Publisher="CN=Japer" Version="1.0.0.0" Uri="https://example.com/releases/JaperApp.msix" />
-  <UpdateSettings>
-    <OnLaunch HoursBetweenUpdateChecks="24" />
-  </UpdateSettings>
-</AppInstaller>

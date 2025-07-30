@@ -1,8 +1,0 @@
-{
-  "file": "explosion.wav",
-  "type": "audio",
-  "durationSec": 0.5,
-  "maxSizeKB": 20,
-  "description": "Explosion sound",
-  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHUlEQVR4nGP8v5ThPwMFgIkSzaMGjBowasBgMgAA9ZECw8vcaZYAAAAASUVORK5CYII="
-}

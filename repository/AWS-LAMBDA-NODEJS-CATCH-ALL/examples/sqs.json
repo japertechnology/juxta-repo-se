@@ -1,5 +1,0 @@
-{
-  "Records": [
-    { "eventSource": "aws:sqs", "messageId": "1", "receiptHandle": "rh", "body": "msg" }
-  ]
-}
