@@ -1,0 +1,8 @@
+{
+  "file": "shoot.wav",
+  "type": "audio",
+  "durationSec": 0.3,
+  "maxSizeKB": 20,
+  "description": "Sound for player shots",
+  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHUlEQVR4nGNsaGj4z0ABYKJE86gBowaMGjCYDAAAYpoCn/nKBY4AAAAASUVORK5CYII="
+}

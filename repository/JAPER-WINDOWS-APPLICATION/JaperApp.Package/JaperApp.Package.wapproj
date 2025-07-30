@@ -1,0 +1,16 @@
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\DesktopBridge\Microsoft.DesktopBridge.targets" />
+  <PropertyGroup>
+    <AppxBundle>Always</AppxBundle>
+    <AppxPackage>true</AppxPackage>
+    <AppxAutoIncrementPackageRevision>true</AppxAutoIncrementPackageRevision>
+    <GenerateAppInstallerFileOnBuild>true</GenerateAppInstallerFileOnBuild>
+    <AppInstallerUri>https://example.com/releases/JaperApp.appinstaller</AppInstallerUri>
+    <AppInstallerUpdateBlocksActivation>true</AppInstallerUpdateBlocksActivation>
+    <AppInstallerCheckForUpdatesFrequency>OnApplicationRun</AppInstallerCheckForUpdatesFrequency>
+    <PackageCertificateKeyFile>JaperApp.Package_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JaperApp\JaperApp.csproj" />
+  </ItemGroup>
+</Project>

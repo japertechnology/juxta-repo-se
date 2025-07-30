@@ -1,0 +1,84 @@
+<!--
+  Entry HTML page for the Galaga clone. All of the gameplay happens within
+  the <canvas> element. The HUD is simply a couple of span elements positioned
+  over the canvas displaying the score and remaining lives.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Galaga JS</title>
+    <style>
+        /* Basic layout styling */
+        body { margin: 0; background: black; color: white; font-family: Arial, sans-serif; }
+        canvas { display: block; margin: 0 auto; background: #000; }
+        #hud {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 14px;
+        }
+        #hud span { margin-right: 15px; }
+        #settings, #selfTest, #message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border: 1px solid #555;
+            display: none;
+        }
+        #message { font-size: 24px; color: yellow; }
+        #settings label,
+        #selfTest label { display: block; margin: 8px 0; }
+    </style>
+</head>
+<body>
+    <div id="hud">
+        <span>Score: <span id="score">0</span></span>
+        <span>Lives: <span id="lives">3</span></span>
+    </div>
+    <div id="settings">
+        <h2>DIP Settings</h2>
+        <label>Difficulty
+            <select id="difficulty">
+                <option value="A">A (Easy)</option>
+                <option value="B">B (Medium)</option>
+                <option value="C">C (Hard)</option>
+                <option value="D">D (Hardest)</option>
+            </select>
+        </label>
+        <label>Starting Fighters
+            <select id="startingLives">
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </label>
+        <label>Bonus Ships
+            <select id="bonus">
+                <option value="20k70k">20,000 &amp; every 70,000</option>
+                <option value="30k80k">30,000 &amp; every 80,000</option>
+                <option value="20kOnce">20,000 only</option>
+            </select>
+        </label>
+        <label><input type="checkbox" id="attractSound" checked> Sound During Attract</label>
+        <label><input type="checkbox" id="rapidFire" checked> Rapid Fire</label>
+        <button id="startBtn">Start P1</button>
+        <button id="startP2Btn">Start P2</button>
+        <button id="selfTestBtn">Self-Test</button>
+    </div>
+    <div id="selfTest">
+        <h2>Self-Test</h2>
+        <pre id="dipReadout"></pre>
+        <button id="playSound">Play Sound</button>
+        <button id="closeTest">Close</button>
+    </div>
+    <div id="message"></div>
+    <canvas id="gameCanvas" width="480" height="640"></canvas>
+    <!-- Main game logic -->
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>

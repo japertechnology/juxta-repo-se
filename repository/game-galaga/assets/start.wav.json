@@ -1,0 +1,8 @@
+{
+  "file": "start.wav",
+  "type": "audio",
+  "durationSec": 2.0,
+  "maxSizeKB": 30,
+  "description": "Stage start music cue",
+  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHUlEQVR4nGNkaGD4z0ABYKJE86gBowaMGjCYDAAAVF4BnxYl3q4AAAAASUVORK5CYII="
+}

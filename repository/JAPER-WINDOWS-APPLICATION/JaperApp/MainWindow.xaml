@@ -1,0 +1,20 @@
+<Window
+    x:Class="JaperApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <StackPanel Padding="12" Spacing="8">
+        <CaptureElement x:Name="PreviewElement" Width="320" Height="240" IsTabStop="False" AutomationProperties.Name="Camera preview"/>
+        <ComboBox x:Name="DeviceComboBox" PlaceholderText="Select camera" AutomationProperties.Name="Camera" TabIndex="0"/>
+        <ComboBox x:Name="ResolutionComboBox" PlaceholderText="Resolution" AutomationProperties.Name="Resolution" TabIndex="1"/>
+        <ToggleSwitch x:Name="MirrorToggle" Content="Mirror" AutomationProperties.Name="Mirror preview" TabIndex="2"/>
+        <ToggleSwitch x:Name="TorchToggle" Content="Torch" AutomationProperties.Name="Torch" TabIndex="3"/>
+        <Button x:Name="ReconnectButton" Content="Reconnect" Visibility="Collapsed" AutomationProperties.Name="Reconnect camera" TabIndex="4"/>
+        <Button x:Name="SettingsButton" Content="Settings" AutomationProperties.Name="Open settings" TabIndex="5"/>
+        <TextBlock x:Name="EngineIndicatorText" Text="Engine: --" HorizontalAlignment="Right"/>
+        <TextBlock x:Name="ResultText" Text="" AutomationProperties.LiveSetting="Polite"/>
+        <TextBlock x:Name="StatusText" Text="" Foreground="Red" TextWrapping="Wrap"/>
+    </StackPanel>
+</Window>

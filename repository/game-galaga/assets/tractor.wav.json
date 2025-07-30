@@ -1,0 +1,8 @@
+{
+  "file": "tractor.wav",
+  "type": "audio",
+  "durationSec": 1.0,
+  "maxSizeKB": 20,
+  "description": "Tractor beam sound",
+  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHUlEQVR4nGNk+P//PwMFgIkSzaMGjBowasBgMgAAYJ0DHVbzsC0AAAAASUVORK5CYII="
+}
