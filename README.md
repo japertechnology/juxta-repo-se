@@ -6,20 +6,9 @@ The repository collects every repository in your organisation so that automation
 
 ## Quick start
 
-1. **Clone this repo** and install [Python 3](https://www.python.org/) and [Git](https://git-scm.com/).
+1. **Clone this repo**.
 2. Generate a GitHub token with permission to read your organisation’s repositories and store it as a `OMNI_READONLY` secret.
-3. Run the initial sync to pull in all repositories using shadow clones:
-
-   ```bash
-   GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org <org-name>
-   ```
-
-   Use `--method submodule` or `--method subtree` to change the cloning method.
-   If you receive a `404` error, double-check the organisation name and ensure
-   your token has permission to access it.
-4. Commit the changes so the `repos/` folder and `repos.json` are tracked.
-
-The same steps can be triggered via the **Init repository sync** workflow (`init-repos.yml`).
+3. Run the Workflows.
 
 ---
 
