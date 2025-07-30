@@ -1,2 +1,2 @@
-spark-validated-selfie
-AWS-LAMBDA-NODEJS-CATCH-ALL
+japertechnology/spark-validated-selfie
+japertechnology/AWS-LAMBDA-NODEJS-CATCH-ALL
