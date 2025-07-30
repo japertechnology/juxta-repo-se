@@ -1,2 +1,2 @@
-japertechnology/spark-validated-selfie
+japertechnology/JAPER-WINDOWS-APPLICATION
 japertechnology/AWS-LAMBDA-NODEJS-CATCH-ALL
