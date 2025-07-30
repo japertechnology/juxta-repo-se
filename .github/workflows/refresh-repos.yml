@@ -7,13 +7,19 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           submodules: recursive
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
+      - name: Validate required secret
+        run: |
+          if [ -z "${{ secrets.OMNI_READONLY }}" ]; then
+            echo "Error: OMNI_READONLY secret is not set"
+            exit 1
+          fi
       - name: Install dependencies
         run: pip install -r tooling/requirements.txt
       - name: Refresh repos.json
@@ -28,4 +34,6 @@ jobs:
             git add repos.json
             git commit -m "chore: manual repos.json refresh"
             git push
+          else
+            echo "No changes to commit"
           fi
