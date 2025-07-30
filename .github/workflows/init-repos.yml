@@ -1,4 +1,4 @@
-name: Init repository sync
+name: Init Repository sync
 
 on:
   workflow_dispatch:
