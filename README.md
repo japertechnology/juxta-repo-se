@@ -1,8 +1,5 @@
 # JAPER GitHub Sync
 
-[![CodeQL](https://github.com/<org>/<repo>/actions/workflows/codeql.yml/badge.svg)](https://github.com/<org>/<repo>/actions/workflows/codeql.yml)
-[![Dependabot Status](https://img.shields.io/github/dependabot/alerts/<org>/<repo>)](https://github.com/<org>/<repo>/security/dependabot)
-
 `JAPER-GITHUB-SYNC` collects every repository in your organisation so that automation tools and AI assistants can reason across the entire codebase.
 
 ---
