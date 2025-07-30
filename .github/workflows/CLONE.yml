@@ -1,4 +1,4 @@
-name: Clone
+name: CLONE
 
 on:
   workflow_dispatch:
