@@ -10,45 +10,28 @@ It captures the latest GitHub snapshots of specified repositories, places them s
 4. **juxtarepose-arrange** clones the repositories listed in `.github/juxtarepose.txt` into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
 5. **juxtarepose-clear** simply deletes the `repository/` directory.
 
-## Overview
+## Primary Benefits
 
-By taking pristine repository snapshots and placing them in static juxtaposition, you can decouple analysis from any live development or history manipulation. This empowers teams to perform fully isolated diffs and reviews, run secure scans, establish performance baselines, enforce license policies, detect anomalies, create teaching demos, and even generate clean datasets for machine-learning—all without touching or altering the original repos.
+* **Merge-Free Side-by-Side Diffing**
+  Instantly compare complete repo snapshots without polluting history or performing merges.
 
-### 1. Merge-Free Side-by-Side Code Review & Diffing
+* **Pristine Static Analysis**
+  Run linters, security scanners, and code-quality tools on untouched codebases to catch issues early.
 
-Get true side-by-side diffs of entire repositories—no branch merges, no history noise—so reviewers can focus purely on code differences. Tools like `git difftool` or web-based diff viewers render two snapshots in parallel for pinpoint clarity.
+* **Reliable Performance Baselines**
+  Benchmark and profile against stable snapshots, isolating regressions from ongoing development noise.
 
-### 2. Static Code Analysis on Pristine Snapshots
+* **Automated License Compliance & SBOMs**
+  Generate accurate bills of materials and enforce open-source license rules without altering code.
 
-Feed untouched snapshots into static analyzers (e.g., GitHub’s CodeQL) to detect bugs, security flaws, and coding-standard violations without any interference from uncommitted changes.
+* **Immutable Audit Trails**
+  Track and compare successive snapshots for forensic investigations, anomaly detection, and compliance reporting.
 
-### 3. Focused Security & Incremental Scans
-
-Run targeted SAST (e.g., CodeQL or third-party tools via SARIF) on specific snapshots—minimizing CI load while maintaining robust vulnerability coverage across a consolidated codebase.
-
-### 4. Performance Benchmarking & Profiling
-
-Use each snapshot as a stable performance baseline for profiling and benchmarking, isolating regressions in CPU, memory, or I/O without the variability of a changing code history.
-
-### 5. License Compliance & SBOM Generation
-
-Generate Software Bills of Materials (SBOMs) from static snapshots to inventory all dependencies and enforce open-source license policies, meeting both security-audit and regulatory requirements.
-
-### 6. Audit Trails & Anomaly Detection
-
-Compare successive snapshots to detect unauthorized or malicious changes—supporting continuous audit logging, CI/CD guardrails, and real-time alerting in regulated environments.
-
-### 7. Educational Demonstrations & Documentation
-
-Create side-by-side comparisons for tutorials, code reviews, or onboarding guides—visually illustrating refactoring steps, design pattern variations, or language-feature contrasts.
-
-### 8. Machine-Learning Dataset Generation
-
-Produce high-fidelity, history-clean datasets (e.g., CodeSearchNet) from snapshots to train models for code retrieval, summarization, or vulnerability prediction—ensuring no extraneous metadata skews your data.
-
-### 9. Change-Impact Analysis & Triage
-
-Quickly assess the scope of changes by isolating diffs between any two static points in time—streamlining impact analysis, QA prioritization, and release-planning decisions
+* **AI-Driven Cross-Repo Synthesis**
+  • **Dependency Graph Mapping:** Auto-discover function calls across repos to identify integration points.
+  • **Context Unification:** Symlinked structures present a coherent codebase to large-language models.
+  • **Semantic Indexing & Retrieval:** Surface relevant patterns and API usages for AI assistants.
+  • **Multi-Agent Pipelines & Refactoring:** Orchestrate specialized agents to generate adapters and synthesize new cross-repo functions without manual merging.
 
 ## Etymology
 
