@@ -1,4 +1,4 @@
-name: juxtarepose
+name: juxtarepose-arrange
 
 on:
   workflow_dispatch:
