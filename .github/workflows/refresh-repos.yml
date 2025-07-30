@@ -18,7 +18,7 @@ jobs:
         run: pip install -r tooling/requirements.txt
       - name: Refresh repos.json
         env:
-          GITHUB_TOKEN: ${{ secrets.OMNI_REPO_READONLY }}
+          GITHUB_TOKEN: ${{ secrets.OMNI_READONLY }}
         run: python tooling/sync_repos.py refresh --org ${{ github.repository_owner }}
       - name: Commit changes
         run: |
