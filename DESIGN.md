@@ -15,7 +15,7 @@ This github repository should:
 ### 1.1 Repository Aggregation
 
 1. **Reference strategy** – Add every downstream repo to the meta‑repo as *Git submodules* (shallow‑cloned) for storage efficiency ([Git][1]).
-2. **Manifest** – Generate `repos.json` containing name, SSH URL, default branch, and last release tag for each repo; refresh nightly via GitHub API.
+2. **Manifest** – Generate `repos.json` containing name, SSH URL, default branch, and last release tag for each repo; update it manually via the GitHub API as needed.
 3. **Alternative path** – Provide a flag to switch to *Git Subtree* copy‑based inclusion for teams that prefer single‑checkout workflows ([atlassian.com][5]).
 
 ### 1.2 Continuous Sync & CI/CD
@@ -64,7 +64,7 @@ This github repository should:
 
 | #  | Artifact                                                            | Acceptance test                                                                                          |
 | -- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| D1 | `meta-repo` Git repository with submodule map & nightly sync action | Clone meta‑repo; verify submodule count equals GitHub API repo count ±1.                                 |
+| D1 | `meta-repo` Git repository with submodule map & manual sync action | Clone meta‑repo; verify submodule count equals GitHub API repo count ±1.                                 |
 | D2 | Reusable CI workflow template                                       | Create sample repo; CI passes with lint & tests executed.                                                |
 | D3 | Renovate & security posture                                         | PRs auto‑open on outdated deps; Code QL runs show “0 critical” on default branches.                      |
 | D4 | Octoherd toolkit                                                    | Run `node tooling/add-license.js`; observe commit to ≥ 3 test repos.                                     |
@@ -77,7 +77,7 @@ This github repository should:
 | Week | Milestone                                                         |
 | ---- | ----------------------------------------------------------------- |
 | 1    | Bootstrap meta‑repo; add all submodules; commit `repos.json`.     |
-| 2    | Implement nightly sync workflow; smoke‑test shallow clones.       |
+| 2    | Implement manual sync workflow; smoke‑test shallow clones.       |
 | 3    | Ship reusable CI workflow; migrate three pilot repos.             |
 | 4    | Stand up Sourcegraph; index pilot repos; enable Cody.             |
 | 5    | Install Renovate; validate automated PRs.                         |
