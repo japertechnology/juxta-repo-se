@@ -1,42 +1,55 @@
-name: Clone Repos to Redos
+name: Clone Repositories into Redos
 
 on:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  REDOS_DIR: redos
+
 jobs:
-  clone_repos:
+  clone:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout this workflow repo
-        uses: actions/checkout@v3
+      - name: Checkout this repo
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0           # get full history so we can read repos.txt
-          persist-credentials: true  # leave GITHUB_TOKEN creds in git config
+          fetch-depth: 1
+          persist-credentials: true
 
-      - name: Create redos directory
-        run: mkdir -p redos
+      - name: Ensure redos directory
+        run: mkdir -p "${{ env.REDOS_DIR }}"
 
-      - name: Configure Git to use GITHUB_TOKEN
+      - name: Read and clone repos
         run: |
-          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          readarray -t repos < repos.txt
+          for repo in "${repos[@]}"; do
+            # Skip empty lines or comments
+            [[ "$repo" =~ ^\s*# ]] || [[ -z "$repo" ]] && continue
 
-      - name: Read repos.txt and shallow‑clone each
-        run: |
-          while IFS= read -r repo || [ -n "$repo" ]; do
-            # skip blanks & comments
-            [[ -z "$repo" || "$repo" =~ ^\s*# ]] && continue
-
-            # build a proper clone URL
+            # Determine clone URL
             if [[ "$repo" =~ ^https?:// ]]; then
               url="$repo"
             else
-              url="https://github.com/$repo.git"
+              url="https://github.com/${repo}.git"
             fi
 
-            # derive folder name (strip .git)
-            name=$(basename "$url" .git)
+            # Derive directory name
+            dir="${repo##*/}"
+            echo "Cloning ${url} into ${REDOS_DIR}/${dir}"
+            git clone --depth 1 "$url" "${REDOS_DIR}/${dir}"
+          done
 
-            echo "Cloning $url → redos/$name"
-            git clone --depth 1 "$url" "redos/$name"
-          done < repos.txt
+      - name: Report status
+        run: echo "Cloned ${#repos[@]} repositories into ${REDOS_DIR}."
