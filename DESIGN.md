@@ -14,9 +14,9 @@ This github repository should:
 
 ### 1.1 Repository Aggregation
 
-1. **Reference strategy** – Add every downstream repo to the meta‑repo as *Git submodules* (shallow‑cloned) for storage efficiency ([Git][1]).
+1. **Reference strategy** – Add every downstream repo to the meta‑repo using *shadow clones* for storage efficiency.
 2. **Manifest** – Generate `repos.json` containing name, SSH URL, default branch, and last release tag for each repo; update it manually via the GitHub API as needed.
-3. **Alternative path** – Provide a flag to switch to *Git Subtree* copy‑based inclusion for teams that prefer single‑checkout workflows ([atlassian.com][5]).
+3. **Alternative path** – Flags allow cloning via *Git submodule* or *Git subtree* when those layouts are preferred ([atlassian.com][5]).
 
 ### 1.2 Continuous Sync & CI/CD
 
@@ -45,7 +45,7 @@ This github repository should:
 
 | Area                | Requirement                                                                                                                |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **Performance**     | Meta‑repo clone ≤ 5 minutes with submodules shallow‑cloned (`--depth 1`).                                                  |
+| **Performance**     | Meta‑repo clone ≤ 5 minutes with shadow clones (`--depth 1`).                                                  |
 | **Scalability**     | Must support ≥ 500 child repos without CI timeout (use Bazel remote cache or Nx affected‑graph). ([Earthly][10], [Nx][11]) |
 | **Security**        | Honour existing repo ACLs; AI index must respect GitHub permissions when serving code to Cody or search users.             |
 | **Maintainability** | All automation scripts documented under `/tooling`; unit‑tested via the reusable workflow.                                 |
@@ -64,7 +64,7 @@ This github repository should:
 
 | #  | Artifact                                                            | Acceptance test                                                                                          |
 | -- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| D1 | `meta-repo` Git repository with submodule map & manual sync action | Clone meta‑repo; verify submodule count equals GitHub API repo count ±1.                                 |
+| D1 | `meta-repo` Git repository with shadow clone map & manual sync action | Clone meta-repo; verify repo count equals GitHub API count ±1.                                 |
 | D2 | Reusable CI workflow template                                       | Create sample repo; CI passes with lint & tests executed.                                                |
 | D3 | Renovate & security posture                                         | PRs auto‑open on outdated deps; Code QL runs show “0 critical” on default branches.                      |
 | D4 | Octoherd toolkit                                                    | Run `node tooling/add-license.js`; observe commit to ≥ 3 test repos.                                     |
@@ -76,7 +76,7 @@ This github repository should:
 
 | Week | Milestone                                                         |
 | ---- | ----------------------------------------------------------------- |
-| 1    | Bootstrap meta‑repo; add all submodules; commit `repos.json`.     |
+| 1    | Bootstrap meta‑repo; add all shadow clones; commit `repos.json`.     |
 | 2    | Implement manual sync workflow; smoke‑test shallow clones.       |
 | 3    | Ship reusable CI workflow; migrate three pilot repos.             |
 | 4    | Stand up Sourcegraph; index pilot repos; enable Cody.             |
@@ -88,7 +88,7 @@ This github repository should:
 
 ## 6  Acceptance Criteria
 
-* **Single‑command setup**: `gh repo clone <org>/meta --recurse-submodules --depth 1` works without manual steps.
+* **Single‑command setup**: `gh repo clone <org>/meta --depth 1` works without manual steps.
 * **Cross‑repo import**: Package published from repo A installs in repo B via GitHub Packages and passes CI.
 * **Search latency**: Sourcegraph returns a multi‑repo symbol search in under 1 second for 95th percentile queries.
 * **AI competency**: Cody answers “Find where `UserBillingService` is instantiated” by citing at least two different repos.

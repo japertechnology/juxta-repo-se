@@ -1,8 +1,9 @@
 """
 Utility script for synchronising all repositories in a GitHub organisation.
 
-The tool can add each repository either as a git submodule or a subtree and
-produces a `repos.json` manifest describing the state of the organisation.
+The tool can clone each repository using one of three strategies—``shadow``
+clone (default), git submodule or git subtree—and produces a ``repos.json``
+manifest describing the state of the organisation.
 
 Typical usage:
     GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org my-org
@@ -90,19 +91,37 @@ def add_subtree(repo: Dict, path: str) -> None:
         check=True,
     )
 
-def init_repos(org: str, token: str, use_subtree: bool) -> None:
+def shadow_clone(repo: Dict, path: str) -> None:
+    """Clone the repository without a working tree for lightweight access."""
+    subprocess.run(
+        [
+            "git",
+            "clone",
+            "--filter=blob:none",
+            "--no-checkout",
+            "--depth",
+            "1",
+            repo["ssh_url"],
+            path,
+        ],
+        check=True,
+    )
+
+def init_repos(org: str, token: str, method: str) -> None:
     """Initialise local references to all organisation repositories."""
     repos = get_repos(org, token)
     entries: List[Dict] = []
     os.makedirs("repos", exist_ok=True)
     for repo in repos:
         path = os.path.join("repos", repo["name"])
-        # Only create the submodule/subtree if the path doesn't already exist
+        # Only create the checkout if the path doesn't already exist
         if not os.path.exists(path):
-            if use_subtree:
+            if method == "subtree":
                 add_subtree(repo, path)
-            else:
+            elif method == "submodule":
                 add_submodule(repo, path)
+            else:
+                shadow_clone(repo, path)
         entries.append(build_repo_entry(repo, org, token))
     # Write out the manifest after processing all repositories
     write_repos_json(entries)
@@ -120,9 +139,14 @@ def main() -> None:
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    init_p = subparsers.add_parser("init", help="Add repositories as submodules or subtrees")
+    init_p = subparsers.add_parser("init", help="Clone organisation repositories")
     init_p.add_argument("--org", required=True, help="GitHub organization")
-    init_p.add_argument("--subtree", action="store_true", help="Use git subtree instead of submodules")
+    init_p.add_argument(
+        "--method",
+        choices=["shadow", "submodule", "subtree"],
+        default="shadow",
+        help="Cloning method to use (default: shadow)",
+    )
 
     refresh_p = subparsers.add_parser("refresh", help="Refresh repos.json")
     refresh_p.add_argument("--org", required=True, help="GitHub organization")
@@ -134,7 +158,7 @@ def main() -> None:
         raise SystemExit("GITHUB_TOKEN environment variable required")
 
     if args.command == "init":
-        init_repos(args.org, token, args.subtree)
+        init_repos(args.org, token, args.method)
     elif args.command == "refresh":
         refresh_repos(args.org, token)
 
