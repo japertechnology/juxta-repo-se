@@ -29,13 +29,10 @@ GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org <org-name> --subtre
 GITHUB_TOKEN=<token> python tooling/sync_repos.py refresh --org <org-name>
 ```
 
-A GitHub Actions workflow runs nightly to keep `repos.json` current.
+Run the `refresh-repos` workflow manually whenever you need to update `repos.json`.
 
-### Automation
+### Manual workflows
 
-The organisation uses **Renovate** for dependency updates. The shared
-configuration lives in `.github/renovate.json` and the Renovate GitHub app
-should be installed on all repositories.
-
-Additional security scanning is handled by **CodeQL** and **Dependabot** via
-workflows in `.github/workflows`.
+Workflows in `.github/workflows` handle tasks like dependency updates and
+security scanning. Trigger these workflows manually whenever maintenance is
+required.

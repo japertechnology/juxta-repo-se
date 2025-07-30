@@ -1,7 +1,7 @@
 name: Org CI
 
 on:
-  workflow_call:
+  workflow_dispatch:
 
 jobs:
   lint:
