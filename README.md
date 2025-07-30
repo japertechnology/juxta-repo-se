@@ -7,7 +7,7 @@ The repository collects every repository in your organisation so that automation
 ## Quick start
 
 1. **Clone this repo** and install [Python 3](https://www.python.org/) and [Git](https://git-scm.com/).
-2. Generate a GitHub token with permission to read your organisation’s repositories and store it as a `OMNI_REPO_READONLY` secret.
+2. Generate a GitHub token with permission to read your organisation’s repositories and store it as a `OMNI_READONLY` secret.
 3. Run the initial sync to pull in all repositories using shadow clones:
 
    ```bash
@@ -51,7 +51,7 @@ Dependabot and Renovate are configured to keep dependencies fresh. Trigger their
 2. Each repository is cloned using one of three methods: **shadow** clone (default), **submodule**, or **subtree** when selected via `--method`.
 3. Metadata about each repository is written to `repos.json`.
 
-Both the `init-repos` and `refresh-repos` workflows invoke this script. When running locally, set `GITHUB_TOKEN` in your environment. GitHub workflows use the `OMNI_REPO_READONLY` secret to populate this variable.
+Both the `init-repos` and `refresh-repos` workflows invoke this script. When running locally, set `GITHUB_TOKEN` in your environment. GitHub workflows use the `OMNI_READONLY` secret to populate this variable.
 
 The generated `repos` directory contains a folder per repository. Shadow clones and submodules use shallow clones for speed, while subtrees copy files directly. `repos.json` captures repository names, SSH URLs, default branches and latest release tags so other tooling has a single source of truth.
 
