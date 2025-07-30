@@ -1,4 +1,4 @@
-name: Clone Repositories into Redos
+name: Clone
 
 on:
   workflow_dispatch:
