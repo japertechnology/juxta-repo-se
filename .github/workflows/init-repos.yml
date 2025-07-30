@@ -1,0 +1,41 @@
+name: Init repository sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      subtree:
+        description: 'Use git subtree instead of submodules'
+        required: false
+        default: 'false'
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install -r tooling/requirements.txt
+      - name: Initialize repositories
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ inputs.subtree }}" = 'true' ]; then
+            python tooling/sync_repos.py init --org ${{ github.repository_owner }} --subtree
+          else
+            python tooling/sync_repos.py init --org ${{ github.repository_owner }}
+          fi
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "chore: initial repository sync"
+            git push
+          fi
