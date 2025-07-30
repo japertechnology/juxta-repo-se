@@ -1,6 +1,6 @@
 # Juxtarepose
 
-It captures the latest GitHub snapshots of specified repositories, places them side‑by‑side, static and untouched, enabling AI-powered analysis and comparison without merging or preserving history.
+It captures the latest GitHub snapshots of specified repositories, places them side‑by‑side, static and untouched, enabling analysis and comparison without merging or preserving history.
 
 ## Quick Start
 
