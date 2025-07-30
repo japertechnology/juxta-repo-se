@@ -1,4 +1,4 @@
-# JAPER GitHub Sync
+# Omni Repo Scope
 
 `JAPER-GITHUB-SYNC` collects every repository in your organisation so that automation tools and AI assistants can reason across the entire codebase.
 
