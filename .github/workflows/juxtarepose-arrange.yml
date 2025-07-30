@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: true
 
-      - name: Ensure .github/CLONE.txt has Unix line endings
+      - name: Ensure .github/juxtarepose.txt has Unix line endings
         run: |
           if command -v dos2unix &> /dev/null; then dos2unix .github/juxtarepose.txt
           else sed -i 's/\r$//' .github/juxtarepose.txt; fi
@@ -59,7 +59,7 @@ jobs:
               echo "❌ Failed to clone $repo"
               continue
             }
-          done < .github/CLONE.txt
+          done < .github/juxtarepose.txt
 
       # 5 – Strip Git metadata so only a snapshot remains
       - name: Remove Git metadata from clones
