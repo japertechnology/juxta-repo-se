@@ -18,17 +18,13 @@ jobs:
       - name: Checkout this repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           persist-credentials: true
 
       - name: Ensure repos.txt has Unix line endings
         run: |
-          if command -v dos2unix &> /dev/null; then
-            dos2unix repos.txt
-          else
-            # fallback: strip CR characters in place
-            sed -i 's/\r$//' repos.txt
-          fi
+          if command -v dos2unix &> /dev/null; then dos2unix repos.txt
+          else sed -i 's/\r$//' repos.txt; fi
 
       - name: Create repository directory
         run: mkdir -p repository
@@ -39,37 +35,30 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s extglob
-          
-          # Debug: show file and contents
+
           echo "Using repos.txt from $(pwd)"
-          ls -lah repos.txt
-          echo "Contents:"
           sed -n '1,20p' repos.txt
 
           while IFS= read -r repo || [[ -n $repo ]]; do
-            # strip any stray carriage returns
             repo="${repo//$'\r'/}"
-            # strip leading/trailing spaces
             repo="${repo##*( )}"
             repo="${repo%%*( )}"
 
-            echo "➤ raw repo: ‘$repo’"
+            echo "➤ raw repo: '$repo'"
             [[ -z "$repo" || "$repo" =~ ^# ]] && { echo "  → skipping"; continue; }
 
-            if [[ "$repo" =~ ^https?:// ]]; then
-              url="$repo"
-            else
-              url="https://github.com/$repo.git"
-            fi
+            if [[ "$repo" =~ ^https?:// ]]; then url="$repo"
+            else url="https://github.com/$repo.git"; fi
 
             auth_url="${url/https:\/\//https:\/\/x-access-token:${GITHUB_TOKEN}@}"
             dir="$(basename "$url" .git)"
-            echo "Cloning $url → repository/$dir"
+            echo "Shallow-cloning $url → repository/$dir"
             git clone --depth 1 "$auth_url" "repository/$dir" || {
-              echo "❌ Failed to clone $repo"
-              continue
-            }
+              echo "❌ Failed to clone $repo"; continue; }
           done < repos.txt
+
+      - name: Remove Git metadata from clones
+        run: rm -rf repository/*/.git
 
       - name: Commit cloned repos
         run: |
@@ -79,6 +68,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "✨ No changes to commit"
           else
-            git commit -m "Add shallow clones in repository/"
+            git commit -m "Add latest snapshots of repos/"
             git push
           fi
