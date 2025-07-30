@@ -16,7 +16,7 @@ jobs:
           python-version: '3.x'
       - name: Refresh repos.json
         env:
-          GITHUB_TOKEN: ${{ secrets.OMNI_READONLY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python tooling/sync_repos.py refresh --org ${{ github.repository_owner }}
       - name: Commit changes
         run: |

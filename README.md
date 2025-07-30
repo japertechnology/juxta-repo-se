@@ -5,8 +5,8 @@ The repository collects every repository in your organisation so that automation
 ## Quick start
 
 1. **Clone this repo**.
-2. Generate a GitHub token with permission to read your organisation’s repositories and store it as a `OMNI_READONLY` secret.
-3. Run the Workflows.
+2. Run the Workflows. The repository uses the default `GITHUB_TOKEN` so no extra secrets are required.
+3. Enjoy organisation-wide automation without additional setup.
 
 ## Workflows
 
@@ -34,7 +34,7 @@ Dependabot is configured to keep dependencies fresh.
 2. Each repository is cloned using one of three methods: **shadow** clone (default), **submodule**, or **subtree** when selected via `--method`.
 3. Metadata about each repository is written to `repos.json`.
 
-Both the `init-repos` and `refresh-repos` workflows invoke this script. When running locally, set `GITHUB_TOKEN` in your environment. GitHub workflows use the `OMNI_READONLY` secret to populate this variable.
+Both the `init-repos` and `refresh-repos` workflows invoke this script. When running locally, set `GITHUB_TOKEN` in your environment. GitHub workflows automatically provide this variable.
 
 The generated `repos` directory contains a folder per repository. Shadow clones and submodules use shallow clones for speed, while subtrees copy files directly. `repos.json` captures repository names, SSH URLs, default branches and latest release tags so other tooling has a single source of truth.
 
