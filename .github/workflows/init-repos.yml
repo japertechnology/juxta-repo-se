@@ -32,17 +32,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gh jq
 
-      - name: Authenticate GH CLI
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "${GITHUB_TOKEN}" | gh auth login --with-token
-
       - name: Clone all other repos for this owner
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
           THIS_REPO: ${{ github.event.repository.name }}
         run: |
-          mkdir -p repos
           gh repo list "$OWNER" --limit 100 --json name -q '.[].name' \
             | while read repo; do
                 if [[ "$repo" != "$THIS_REPO" ]]; then
