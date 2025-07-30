@@ -1,4 +1,4 @@
-name: juxtaRepose
+name: juxtarepose
 
 on:
   workflow_dispatch:
