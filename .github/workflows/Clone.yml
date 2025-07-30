@@ -3,53 +3,45 @@ name: Clone Repositories into Redos
 on:
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 permissions:
   contents: read
-
-defaults:
-  run:
-    shell: bash
-
-env:
-  REDOS_DIR: redos
 
 jobs:
   clone:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
-      - name: Checkout this repo
+      - name: Checkout this workflow repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
           persist-credentials: true
 
-      - name: Ensure redos directory
-        run: mkdir -p "${{ env.REDOS_DIR }}"
+      - name: Create redos directory
+        run: mkdir -p redos
 
-      - name: Read and clone repos
+      - name: Read repos.txt and shallow‑clone each with token
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          readarray -t repos < repos.txt
-          for repo in "${repos[@]}"; do
-            # Skip empty lines or comments
-            [[ "$repo" =~ ^\s*# ]] || [[ -z "$repo" ]] && continue
+          while IFS= read -r repo || [ -n "$repo" ]; do
+            [[ -z "$repo" || "$repo" =~ ^\s*# ]] && continue
 
-            # Determine clone URL
+            # Build the raw HTTPS URL (with .git)
             if [[ "$repo" =~ ^https?:// ]]; then
-              url="$repo"
+              raw="$repo"
             else
-              url="https://github.com/${repo}.git"
+              raw="https://github.com/${repo}.git"
             fi
 
-            # Derive directory name
-            dir="${repo##*/}"
-            echo "Cloning ${url} into ${REDOS_DIR}/${dir}"
-            git clone --depth 1 "$url" "${REDOS_DIR}/${dir}"
-          done
+            # Inject the token into the URL for auth
+            auth="${raw/https:\/\//https:\/\/x-access-token:${GITHUB_TOKEN}@}"
 
-      - name: Report status
-        run: echo "Cloned ${#repos[@]} repositories into ${REDOS_DIR}."
+            # Derive folder name & clone
+            name=$(basename "$raw" .git)
+            echo "Cloning $raw → redos/$name"
+            git clone --depth 1 "$auth" "redos/$name"
+          done < repos.txt
