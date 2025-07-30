@@ -13,8 +13,10 @@ The repository collects every repository in your organisation so that automation
    ```bash
    GITHUB_TOKEN=<token> python tooling/sync_repos.py init --org <org-name>
    ```
-   
+
    Use `--method submodule` or `--method subtree` to change the cloning method.
+   If you receive a `404` error, double-check the organisation name and ensure
+   your token has permission to access it.
 4. Commit the changes so the `repos/` folder and `repos.json` are tracked.
 
 The same steps can be triggered via the **Init repository sync** workflow (`init-repos.yml`).
