@@ -50,8 +50,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: pip install -r tooling/requirements.txt
 
       - name: Initialize repositories
         run: |
