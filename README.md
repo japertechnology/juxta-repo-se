@@ -7,8 +7,8 @@ It captures the latest GitHub snapshots of specified repositories, places them s
 1. **Fork** this repository on GitHub, then **clone** it locally to your machine.
 2. Generate a **GitHub token** with **read-only repository** access and save it under **`JUXTAREPOSE`** in your repository’s **Actions secrets**.
 3. Open `.GitHub/juxtarepose.txt`, and add each target repository on its own line using the format: `owner/repository`.
-4. Trigger the [**juxtarepose-arrange** workflow](.github/workflows/juxtarepose-arrange.yml) to fetch and arrange those snapshots into the `repository/` directory.
-5. Trigger the [**juxtarepose-clear** workflow](.github/workflows/juxtarepose-clear.yml) to remove the `repository/` directory.
+4. Trigger the [**juxtarepose-arrange**](.github/workflows/juxtarepose-arrange.yml) GitHub Workflow to fetch and arrange `.GitHub/juxtarepose.txt` respoitory snapshots into the `repository/` directory.
+5. Trigger the [**juxtarepose-clear**](.github/workflows/juxtarepose-clear.yml) GitHub Workflow to remove the `repository/` directory.
  
 ---
 
