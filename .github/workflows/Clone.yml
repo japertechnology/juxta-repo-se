@@ -1,4 +1,4 @@
-name: Clone
+name: Clone Repos to Redos
 
 on:
   workflow_dispatch:
@@ -8,29 +8,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout this workflow repo
         uses: actions/checkout@v3
         with:
-          # Get full history so we can read repos.txt reliably
-          fetch-depth: 0
+          fetch-depth: 0           # get full history so we can read repos.txt
+          persist-credentials: true  # leave GITHUB_TOKEN creds in git config
 
       - name: Create redos directory
         run: mkdir -p redos
 
+      - name: Configure Git to use GITHUB_TOKEN
+        run: |
+          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
       - name: Read repos.txt and shallow‑clone each
         run: |
           while IFS= read -r repo || [ -n "$repo" ]; do
-            # Skip empty lines and comments
+            # skip blanks & comments
             [[ -z "$repo" || "$repo" =~ ^\s*# ]] && continue
 
-            # Determine clone URL
+            # build a proper clone URL
             if [[ "$repo" =~ ^https?:// ]]; then
               url="$repo"
             else
               url="https://github.com/$repo.git"
             fi
 
-            # Derive a directory name (strip .git if present)
+            # derive folder name (strip .git)
             name=$(basename "$url" .git)
 
             echo "Cloning $url → redos/$name"
