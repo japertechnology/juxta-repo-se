@@ -36,6 +36,10 @@ def get_repos(org: str, token: str) -> List[Dict]:
         resp = github_request(
             f"{API_BASE}/orgs/{org}/repos?per_page=100&page={page}", token
         )
+        if resp.status_code == 404:
+            raise ValueError(
+                f"Organization '{org}' not found or you do not have access"
+            )
         resp.raise_for_status()
         data = resp.json()
         if not data:
