@@ -15,29 +15,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1 – Check out the workflow repository itself
       - name: Checkout this repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
           persist-credentials: true
 
-      # 2 – Normalise line endings in the repo list
       - name: Ensure .github/CLONE.txt has Unix line endings
         run: |
-          if command -v dos2unix &> /dev/null; then dos2unix .github/CLONE.txt
-          else sed -i 's/\r$//' .github/CLONE.txt; fi
+          if command -v dos2unix &> /dev/null; then dos2unix .github/juxtarepose.txt
+          else sed -i 's/\r$//' .github/juxtarepose.txt; fi
 
-      # 3 – Create (or clean) the snapshot directory
       - name: Prepare snapshot directory
         run: |
           mkdir -p repository
           rm -rf repository/*   # start from a clean slate
 
-      # 4 – Read the list and shallow‑clone each repo
-      - name: Shallow‑clone every repo in CLONE.txt
+      - name: Shallow‑clone every repo in juxtarepose.txt
         env:
-          MULTI_REPO_TOKEN: ${{ secrets.OMNI_READONLY }}
+          MULTI_REPO_TOKEN: ${{ secrets.JUXTAREPOSE }}
         run: |
           set -euo pipefail
           while IFS= read -r repo || [[ -n $repo ]]; do
