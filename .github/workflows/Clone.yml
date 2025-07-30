@@ -1,0 +1,38 @@
+name: Clone
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clone_repos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # Get full history so we can read repos.txt reliably
+          fetch-depth: 0
+
+      - name: Create redos directory
+        run: mkdir -p redos
+
+      - name: Read repos.txt and shallow‑clone each
+        run: |
+          while IFS= read -r repo || [ -n "$repo" ]; do
+            # Skip empty lines and comments
+            [[ -z "$repo" || "$repo" =~ ^\s*# ]] && continue
+
+            # Determine clone URL
+            if [[ "$repo" =~ ^https?:// ]]; then
+              url="$repo"
+            else
+              url="https://github.com/$repo.git"
+            fi
+
+            # Derive a directory name (strip .git if present)
+            name=$(basename "$url" .git)
+
+            echo "Cloning $url → redos/$name"
+            git clone --depth 1 "$url" "redos/$name"
+          done < repos.txt
