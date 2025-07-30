@@ -1,4 +1,4 @@
-name: Init Repository Sync
+name: Init Repository sync
 
 on:
   workflow_dispatch:
@@ -16,12 +16,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
+      - name: Create workspace folder
+        run: mkdir -p repos
+
+      - name: Check out this repo into repos/
         uses: actions/checkout@v3
         with:
+          path: repos/${{ github.event.repository.name }}
           fetch-depth: 0
           ref: ${{ github.ref }}
           submodules: recursive
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh jq
+
+      - name: Authenticate GH CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "${GITHUB_TOKEN}" | gh auth login --with-token
+
+      - name: Clone all other repos for this owner
+        env:
+          OWNER: ${{ github.repository_owner }}
+          THIS_REPO: ${{ github.event.repository.name }}
+        run: |
+          mkdir -p repos
+          gh repo list "$OWNER" --limit 100 --json name -q '.[].name' \
+            | while read repo; do
+                if [[ "$repo" != "$THIS_REPO" ]]; then
+                  gh repo clone "${OWNER}/${repo}" "repos/${repo}"
+                fi
+              done
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -32,15 +59,9 @@ jobs:
         run: pip install -r tooling/requirements.txt
 
       - name: Initialize repositories
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Determine the owner (org or user) from the repo slug "owner/name"
-          OWNER="${GITHUB_REPOSITORY%/*}"
-          # Fallback to 'shadow' if somehow the input is empty
           METHOD="${{ github.event.inputs.method || 'shadow' }}"
           python tooling/sync_repos.py init \
-            --org "$OWNER" \
             --method "$METHOD"
 
       - name: Commit & push changes
