@@ -3,10 +3,10 @@ name: Init repository sync
 on:
   workflow_dispatch:
     inputs:
-      subtree:
-        description: 'Use git subtree instead of submodules'
+      method:
+        description: 'clone method: shadow, submodule or subtree'
         required: false
-        default: 'false'
+        default: 'shadow'
 
 jobs:
   init:
@@ -25,11 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ "${{ inputs.subtree }}" = 'true' ]; then
-            python tooling/sync_repos.py init --org ${{ github.repository_owner }} --subtree
-          else
-            python tooling/sync_repos.py init --org ${{ github.repository_owner }}
-          fi
+          python tooling/sync_repos.py init --org ${{ github.repository_owner }} --method ${{ inputs.method }}
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
