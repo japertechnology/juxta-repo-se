@@ -9,5 +9,3 @@ Captures the latest GitHub snapshots of specified repositories, places them side
 [**.github/workflows/juxta-repo-arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed in `.github/juxta-repo.txt` file into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
  
 [**.github/workflows/juxta-repo-clear**](.github/workflows/juxta-repo-clear.yml) deletes the `repository/` directory.
-
-Share <a href="https://www.facebook.com/share.php?u=https%3A%2F%2Fgithub.com%2Fjapertechnology%2Fjuxta-repo&p[images][0]=&p[title]=juxta-repo&p[summary]=">Facebook</a> <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://github.com/japertechnology/juxta-repo&title=juxta-repo&summary=&source=">LinkedIn</a> <a href="https://toot.kytta.dev/?mini=true&url=https://github.com/japertechnology/juxta-repo&title=juxta-repo&summary=&source=">Mastodon</a> <a href="https://t.me/share/url?url=https://github.com/japertechnology/juxta-repo">Telegram</a> <a href="https://twitter.com/intent/tweet?text=https://github.com/japertechnology/juxta-repo">X</a>
