@@ -1,5 +1,0 @@
-{
-  "request": { "type": "IntentRequest" },
-  "session": { "sessionId": "abc" },
-  "context": { "System": {} }
-}

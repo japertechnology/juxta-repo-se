@@ -1,5 +1,0 @@
-import type { LambdaHandler } from '../index.d.ts';
-import type { Context } from 'aws-lambda';
-
-declare const handleCognito: LambdaHandler;
-export default handleCognito;
