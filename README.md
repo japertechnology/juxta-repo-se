@@ -4,6 +4,8 @@
 
 Captures the latest GitHub snapshots of specified repositories, places them side‑by‑side, static and untouched, enabling analysis and comparison without merging or preserving history.
 
+---
+
 ## Quick Start
 
 1. In your fork on GitHub, open the **Actions** tab.
