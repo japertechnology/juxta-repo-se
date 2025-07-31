@@ -10,7 +10,7 @@ Captures the latest GitHub snapshots of specified repositories, places them side
 4. **juxtarepose-arrange** clones the repositories listed in `.github/juxtarepose.txt` into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
 5. **juxtarepose-clear** simply deletes the `repository/` directory.
 
-## Primary Benefits
+## Benefits
 
 * **Merge-Free Side-by-Side Diffing**
   Instantly compare complete repo snapshots without polluting history or performing merges.
@@ -28,9 +28,13 @@ Captures the latest GitHub snapshots of specified repositories, places them side
   Track and compare successive snapshots for forensic investigations, anomaly detection, and compliance reporting.
 
 * **AI-Driven Cross-Repo Synthesis**
+  
   • **Dependency Graph Mapping:** Auto-discover function calls across repos to identify integration points.
+  
   • **Context Unification:** Symlinked structures present a coherent codebase to large-language models.
+  
   • **Semantic Indexing & Retrieval:** Surface relevant patterns and API usages for AI assistants.
+  
   • **Multi-Agent Pipelines & Refactoring:** Orchestrate specialized agents to generate adapters and synthesize new cross-repo functions without manual merging.
 
 ## Etymology
