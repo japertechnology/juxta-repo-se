@@ -14,7 +14,7 @@ Captures the latest GitHub snapshots of specified repositories, places them side
 4. **juxtarepose-arrange** clones the repositories listed in `.github/juxtarepose.txt` into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
 5. **juxtarepose-clear** simply deletes the `repository/` directory.
 
-## Benefits
+## Possibilites
 
 * **Merge-Free Side-by-Side Diffing**
   Instantly compare complete repo snapshots without polluting history or performing merges.
