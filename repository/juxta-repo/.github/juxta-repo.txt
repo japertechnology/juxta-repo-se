@@ -1,4 +1,1 @@
 japertechnology/juxta-repo
-japertechnology/AWS-LAMBDA-NODEJS-CATCH-ALL
-japertechnology/DEVELOPER-JAPER-IO
-aws/aws-sdk-js

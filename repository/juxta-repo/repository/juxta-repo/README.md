@@ -4,6 +4,8 @@
 
 Captures the latest GitHub snapshots of specified repositories, places them side‑by‑side, static and untouched, enabling analysis and comparison without merging or preserving history.
 
+---
+
 ## Quick Start
 
 1. In your fork on GitHub, open the **Actions** tab.
@@ -38,3 +40,9 @@ Captures the latest GitHub snapshots of specified repositories, places them side
   • **Semantic Indexing & Retrieval:** Surface relevant patterns and API usages for AI assistants.
   
   • **Multi-Agent Pipelines & Refactoring:** Orchestrate specialized agents to generate adapters and synthesize new cross-repo functions without manual merging.
+
+---
+
+## Etymology
+
+"juxtarepose" blends juxta‑ (Latin iuxta, “beside” or “near”) from which juxtapose (“to place side by side”) derives, with repose (from Latin reposāre, meaning “to rest”). Together, the name elegantly evokes code repositories resting side by side, untouched and ready for comparison.

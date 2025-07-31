@@ -1,0 +1,79 @@
+name: juxta-repo-arrange
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write   # allow this job to push snapshots back
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  clone:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Ensure .github/juxta-repo.txt has Unix line endings
+        run: |
+          if command -v dos2unix &> /dev/null; then dos2unix .github/juxta-repo.txt
+          else sed -i 's/\r$//' .github/juxta-repo.txt; fi
+
+      - name: Prepare snapshot directory
+        run: |
+          mkdir -p repository
+          rm -rf repository/*   # start from a clean slate
+
+      - name: Shallow‑clone every repo in juxta-repo.txt
+        env:
+          MULTI_REPO_TOKEN: ${{ secrets.JUXTA_REPO_PERMISSION }}
+        run: |
+          set -euo pipefail
+          while IFS= read -r repo || [[ -n $repo ]]; do
+            # Trim whitespace and ignore blanks / comments
+            repo="${repo//$'\r'/}"
+            repo="${repo##*( )}"; repo="${repo%%*( )}"
+            [[ -z "$repo" || "$repo" =~ ^# ]] && continue
+
+            # Build full HTTPS URL (accepts owner/name or full URL)
+            if [[ $repo =~ ^https?:// ]]; then
+              url="$repo"
+            else
+              url="https://github.com/$repo.git"
+            fi
+
+            # Inject PAT for authentication
+            auth_url="${url/https:\/\//https:\/\/x-access-token:${MULTI_REPO_TOKEN}@}"
+
+            # Clone into repository/<repo‑name>
+            target="repository/$(basename "$url" .git)"
+            echo "➤ Cloning $url → $target"
+            git clone --depth 1 "$auth_url" "$target" || {
+              echo "❌ Failed to clone $repo"
+              continue
+            }
+          done < .github/juxta-repo.txt
+
+      # 5 – Strip Git metadata so only a snapshot remains
+      - name: Remove Git metadata from clones
+        run: rm -rf repository/*/.git
+
+      # 6 – Commit the fresh snapshots back to this repo
+      - name: Commit cloned repos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add repository
+          if git diff --cached --quiet; then
+            echo "✨ No changes to commit"
+          else
+            git commit -m "Add latest snapshots of repos/"
+            git push
+          fi
