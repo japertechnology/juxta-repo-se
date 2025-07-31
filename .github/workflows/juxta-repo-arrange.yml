@@ -1,4 +1,4 @@
-name: juxtarepose-arrange
+name: juxta-repo-arrange
 
 on:
   workflow_dispatch:
