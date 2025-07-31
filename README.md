@@ -41,6 +41,8 @@ Captures the latest GitHub snapshots of specified repositories, places them side
   
   • **Multi-Agent Pipelines & Refactoring:** Orchestrate specialized agents to generate adapters and synthesize new cross-repo functions without manual merging.
 
+---
+
 ## Etymology
 
 "JuxtaRepose" blends juxta‑ (Latin iuxta, “beside” or “near”) from which juxtapose (“to place side by side”) derives, with repose (from Latin reposāre, meaning “to rest”). Together, the name elegantly evokes code repositories resting side by side, untouched and ready for AI-powered comparison.
