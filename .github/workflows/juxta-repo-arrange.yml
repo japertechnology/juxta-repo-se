@@ -59,7 +59,7 @@ jobs:
               echo "❌ Failed to clone $repo"
               continue
             }
-          done < .github/juxta_repo.txt
+          done < .github/juxta-repo.txt
 
       # 5 – Strip Git metadata so only a snapshot remains
       - name: Remove Git metadata from clones
