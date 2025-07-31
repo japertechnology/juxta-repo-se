@@ -12,9 +12,7 @@ Captures the latest GitHub snapshots of specified repositories, places them side
 
 ---
 
-## Demonstration
-
-This repo demostrates with the 10 top GitHub repositories for self‑paced learning in coding and tech fundamentals in the [**repository**](repository/).
+As a demonstration this juxta‑repo has arranged the 10 top educational GitHub repositories into the [**repository**](repository/) for direct comparison and in-depth analysis across coding, system design, algorithms, and web‑dev learning paths.
 
 #### [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp) A nonprofit offering a comprehensive curriculum covering web development, data science, and more. It includes thousands of coding challenges, projects, and certifications.
 
