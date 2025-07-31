@@ -9,3 +9,29 @@ Captures the latest GitHub snapshots of specified repositories, places them side
 [**.github/workflows/juxta-repo-arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed in `.github/juxta-repo.txt` file into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
  
 [**.github/workflows/juxta-repo-clear**](.github/workflows/juxta-repo-clear.yml) deletes the `repository/` directory.
+
+---
+
+## Demonstration
+
+Explore the 10 top GitHub repositories for self‑paced learning in coding and tech fundamentals in this [**repository**](repository/).
+
+#### [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp) A nonprofit offering a comprehensive curriculum covering web development, data science, and more. It includes thousands of coding challenges, projects, and certifications.
+
+#### [free-programming-books](https://github.com/EbookFoundation/free-programming-books) A massive collection of free programming books in over 30 languages, curated by the Free Ebook Foundation. It covers a wide range of programming topics and languages.
+
+#### [Coding Interview University](https://github.com/jwasham/coding-interview-university) A self-study plan for software engineering interviews, covering computer science fundamentals, algorithms, and system design.;
+
+#### [Developer Roadmap](https://github.com/kamranahmedse/developer-roadmap) Visual roadmaps outlining the path to becoming a developer in various fields, including frontend, backend, and DevOps.
+
+#### [System Design Primer](https://github.com/donnemartin/system-design-primer) A comprehensive guide to system design, including concepts, interview questions, and real-world examples.
+
+#### [The Algorithms](https://github.com/TheAlgorithms/Python) A collection of algorithms implemented in Python, covering topics from basic to advanced levels. It's a great resource for learning and practicing algorithms.;
+
+#### [Awesome Learning Resources](https://github.com/lauragift21/awesome-learning-resources) A curated list of learning resources, including tutorials, courses, and books, across various programming languages and topics.
+
+#### [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) An in-depth series of books on JavaScript, exploring the language's core mechanisms and concepts.
+
+#### [Public APIs](https://github.com/public-apis/public-apis) A collective list of free APIs for development across various domains, including weather, sports, and data.
+
+#### [Exercism](https://github.com/exercism) An open-source platform offering coding exercises and mentorship in over 70 programming languages. It provides a hands-on approach to learning.
