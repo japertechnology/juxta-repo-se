@@ -1,4 +1,4 @@
-name: juxtarepose-clear
+name: juxta-repo-clear
 
 on:
   workflow_dispatch:
