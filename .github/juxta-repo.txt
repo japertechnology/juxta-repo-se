@@ -1,2 +1,10 @@
 freeCodeCamp/freeCodeCamp
+codecrafters-io/build-your-own-x
+sindresorhus/awesome
 EbookFoundation/free-programming-books
+kamranahmedse/developer-roadmap
+jwasham/coding-interview-university
+donnemartin/system-design-primer
+996icu/996.ICU
+vinta/awesome-python
+facebook/react
