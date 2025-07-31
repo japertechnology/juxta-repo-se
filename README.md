@@ -6,11 +6,9 @@ Captures the latest GitHub snapshots of specified repositories, places them side
 
 ## Quick Start
 
-1. In your fork on GitHub, open the **Actions** tab.
-2. Open [**.github/juxta-repo,txt**](.github/juxta-repo.txt), and add each target repository on its own line using the format: `owner/repository`.
-3. Select either [**juxta-repo-arrange**](.github/workflows/juxta-repo-arrange.yml) or [**juxta-repo-clear**](.github/workflows/juxta-repo-clear.yml) in the sidebar and click **Run workflow**.
-4. **juxta-repo-arrange** clones the repositories listed in `.github/juxtarepose.txt` into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
-5. **juxta-repo-clear** simply deletes the `repository/` directory.
+1. [**.github/juxta-repo,txt**](.github/juxta-repo.txt) contains the list of repositories to arrange, each on its own line using the format: `owner/repository` and on commit arrangments occur automatcially.
+3. [**juxta-repo-arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed in `.github/juxtarepose.txt` file into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
+4. [**juxta-repo-clear**](.github/workflows/juxta-repo-clear.yml) to delete the `repository/` directory.
 
 ## Possibilites
 
