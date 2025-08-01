@@ -8,10 +8,12 @@
  
 - [**Clear**](.github/workflows/juxta-repo-clear.yml) deletes the [**repository/**](repository/) directory.
 
-### Configure Token
+### Create Token
 
 - [**Edit GitHub Token (fine-grained)**](https://github.com/settings/personal-access-tokens)
 
 - [**Edit GitHub Token (classic)**](https://github.com/settings/tokens)
 
-- [**Edit GitHub Repo Secrets**](/settings/secrets/actions)
+### Configure Repo Secret
+
+- [**Edit GitHub Repo Secrets**](https://github.com/japertechnology/juxta-repo/settings/secrets/actions)
