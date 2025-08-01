@@ -1,8 +1,10 @@
-# Control Panel
+# Control
 
-### Command
+### Setup
 
 - [**Edit**](.github/juxta-repo.txt) the repositories list.
+
+### Actions
 
 - [**Arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed.
  
