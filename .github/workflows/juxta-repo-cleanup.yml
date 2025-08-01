@@ -1,5 +1,5 @@
 name: juxta-repo-cleanup
-# Replaces README.md with SETTINGS.md and removes LICENSE.md
+# Replaces README.md with SETTINGS.md and removes LICENSE.md, juxta-repo.jpg and repository/
 
 on:
   workflow_dispatch:
@@ -11,16 +11,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Delete LICENSE.md
-        run: |
-          rm -f LICENSE.md
-
       - name: Rename SETTINGS.md to README.md
         run: |
           if [ -f SETTINGS.md ]; then
             mv README.md HELP.md
             mv SETTINGS.md README.md
           fi
+
+      - name: Delete LICENSE.md and logo
+        run: |
+          rm -f LICENSE.md juxta-repo.jpg
+
+      - name: Remove repository directory
+        run: |
+          rm -rf repository
 
       - name: Commit and push changes
         run: |
