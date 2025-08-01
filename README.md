@@ -10,6 +10,8 @@ Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) 
  
 [**.github/workflows/juxta-repo-clear**](.github/workflows/juxta-repo-clear.yml) deletes the `repository/` directory.
 
+To access private repos, store a GitHub token, [**fine-grained**](https://github.com/settings/personal-access-tokens) or [**classic**](https://github.com/settings/tokens), in a [**secret**](/settings/secrets/actions) named **JUXTA_REPO_PERMISSION**, with read access to those repos.
+
 ---
 
 As a **demonstration** this juxta‑repo has arranged the [**10 top educational GitHub repositories**](.github/juxta-repo.txt) into the [**repository**](repository/) for direct comparison and in-depth analysis across coding, system design, algorithms, and web‑dev learning paths.
