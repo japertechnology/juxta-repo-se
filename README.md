@@ -18,6 +18,8 @@ Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) 
 
 To access private repos, store a GitHub token, [**fine-grained**](https://github.com/settings/personal-access-tokens) or [**classic**](https://github.com/settings/tokens), in a [**secret**](/settings/secrets/actions) named **JUXTA_REPO_PERMISSION**, with read access to those repos.
 
+[**.github/workflows/juxta-repo-cleanup**](.github/workflows/juxta-repo-cleanup.yml) renames `README.md` to `HELP.md`, `SETTINGS.md` to `README.md` and the `LICENSE.md1` and `repository/` directory are deleted.
+
 <br>
 
 ## Demonstration
