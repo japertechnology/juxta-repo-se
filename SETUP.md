@@ -1,5 +1,3 @@
-# Control
-
 ### Setup
 
 - [**Edit**](.github/juxta-repo.txt) the list or repositories to arrange.
@@ -10,7 +8,7 @@
  
 - [**Clear**](.github/workflows/juxta-repo-clear.yml) deletes the [**repository/**](repository/) directory.
 
-### Configure
+### Configure Token
 
 - [**Edit GitHub Token (fine-grained)**](https://github.com/settings/personal-access-tokens)
 
