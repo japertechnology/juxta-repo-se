@@ -1,17 +1,9 @@
-# juxta-repo
+# [**juxta-repo**](https://github/japertechnologyjuxta-repo)
 
-### Creates repo snapshots from a text list.
+[**Edit**](.github/juxta-repo.txt) the list, owner/repo, one repo per line.
 
-<br>
+[**Arrange**](.github/workflows/juxta-repo-arrange.yml) creates and populates the [**repository**](repository/) directory.
 
-[**List Repositories**](.github/juxta-repo.txt) to clone, owner/repo, one repo per line.
+[**Clear**](.github/workflows/juxta-repo-clear.yml) deletes the [**repository**](repository/) directory.
 
-<br>
-
-[**Run Arrange**](.github/workflows/juxta-repo-arrange.yml) to clone the repositories listed into the [**repository**](repository/) directory.
-
-[**Run Clear**](.github/workflows/juxta-repo-clear.yml) to delete the [**repository/**](repository) directory.
-
-<br>
-
-##### Private repos cloning requires a GitHub Personal Access Token, either [**Fine-grained**](https://github.com/settings/personal-access-tokens) or [**Classic**](https://github.com/settings/tokens), and maintain a [**Repo Secret**](https://github.com/japertechnology/juxta-repo/settings/secrets/actions) called **JUXTA_REPO_PERMISSION**.
+Private repo cloning requires a [**GitHub Personal Access Token**](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens), [**fine-grained**](https://github.com/settings/personal-access-tokens) or [**classic**](https://github.com/settings/tokens), to be maintained in a [**Repo Secret**](https://github.com/japertechnology/juxta-repo/settings/secrets/actions) called **JUXTA_REPO_PERMISSION**.
