@@ -15,5 +15,3 @@
 - [**Edit GitHub Token (classic)**](https://github.com/settings/tokens)
 
 - [**Edit GitHub Repo Secrets**](/settings/secrets/actions)
-
-![https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg](https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg)
