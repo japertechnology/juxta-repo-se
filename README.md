@@ -6,6 +6,8 @@ Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) 
 
 ![https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg](https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg)
 
+<br>
+
 ## Instructions
 
 [**.github/juxta-repo,txt**](.github/juxta-repo.txt) contains the list of repositories to arrange, each on its own line using the format: `owner/repository` and when committed arrangements will be made.
@@ -15,6 +17,8 @@ Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) 
 [**.github/workflows/juxta-repo-clear**](.github/workflows/juxta-repo-clear.yml) deletes the `repository/` directory.
 
 To access private repos, store a GitHub token, [**fine-grained**](https://github.com/settings/personal-access-tokens) or [**classic**](https://github.com/settings/tokens), in a [**secret**](/settings/secrets/actions) named **JUXTA_REPO_PERMISSION**, with read access to those repos.
+
+<br>
 
 ## Demonstration
 
