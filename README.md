@@ -4,6 +4,10 @@
 
 Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) repositories, places them [**side-by-side**](repository/), static and untouched, enabling analysis and comparison without merging or preserving history.
 
+![https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg](https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg)
+
+## Instructions
+
 [**.github/juxta-repo,txt**](.github/juxta-repo.txt) contains the list of repositories to arrange, each on its own line using the format: `owner/repository` and when committed arrangements will be made.
 
 [**.github/workflows/juxta-repo-arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed in `.github/juxta-repo.txt` file into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
@@ -12,7 +16,7 @@ Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) 
 
 To access private repos, store a GitHub token, [**fine-grained**](https://github.com/settings/personal-access-tokens) or [**classic**](https://github.com/settings/tokens), in a [**secret**](/settings/secrets/actions) named **JUXTA_REPO_PERMISSION**, with read access to those repos.
 
----
+## Demonstration
 
 As a **demonstration** this juxta‑repo has arranged the [**10 top educational GitHub repositories**](.github/juxta-repo.txt) into the [**repository**](repository/) for direct comparison and in-depth analysis across coding, system design, algorithms, and web‑dev learning paths.
 
@@ -35,7 +39,3 @@ As a **demonstration** this juxta‑repo has arranged the [**10 top educational 
 ##### [Public APIs](https://github.com/public-apis/public-apis) A collective list of free APIs for development across various domains, including weather, sports, and data.
 
 ##### [Exercism](https://github.com/exercism) An open-source platform offering coding exercises and mentorship in over 70 programming languages. It provides a hands-on approach to learning.
-
----
-
-![https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg](https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg)
