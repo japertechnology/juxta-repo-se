@@ -2,22 +2,24 @@
 
 Creates repo snapshots from a text list.
 
-### Edit Repository List
+<br>
+
+### Edit the list of GitHub Repositories
 
 - [**Edit**](.github/juxta-repo.txt) the list or repositories to arrange.
 
-### Execute GitHub Actions
+<br>
+
+### Execute a GitHub Actions
 
 - [**Arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed into the [**repository/**](repository/) directory.
  
 - [**Clear**](.github/workflows/juxta-repo-clear.yml) deletes the [**repository/**](repository/) directory.
 
-### Create GitHub Personal Access Token
+<br>
 
-- [**Fine-grained**](https://github.com/settings/personal-access-tokens)
+### Create a GitHub Personal Access Token
 
-- [**Classic**](https://github.com/settings/tokens)
+- Create a token either [**Fine-grained**](https://github.com/settings/personal-access-tokens) or [**Classic**](https://github.com/settings/tokens).
 
-### Configure GitHub Repo Secrets
-
-- [**Edit Repo Secrets**](https://github.com/japertechnology/juxta-repo/settings/secrets/actions)
+- Maintain a [**Repo Secret**](https://github.com/japertechnology/juxta-repo/settings/secrets/actions) called **JUXTA_REPO_PERMISSION** that contains a token.
