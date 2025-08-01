@@ -1,4 +1,4 @@
-# [**juxta-repo**](https://github/japertechnologyjuxta-repo)
+# [**juxta-repo**](https://github.com/japertechnology/juxta-repo)
 
 [**Edit**](.github/juxta-repo.txt) the list, owner/repo, one repo per line.
 
