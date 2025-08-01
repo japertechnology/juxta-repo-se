@@ -35,3 +35,7 @@ As a **demonstration** this juxta‑repo has arranged the [**10 top educational 
 ##### [Public APIs](https://github.com/public-apis/public-apis) A collective list of free APIs for development across various domains, including weather, sports, and data.
 
 ##### [Exercism](https://github.com/exercism) An open-source platform offering coding exercises and mentorship in over 70 programming languages. It provides a hands-on approach to learning.
+
+---
+
+![https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg](https://github.com/japertechnology/juxta-repo/blob/main/juxta-repo.jpg)
