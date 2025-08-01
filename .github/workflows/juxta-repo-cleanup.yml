@@ -1,0 +1,33 @@
+name: juxta-repo-cleanup
+# Replaces README.md with SETTINGS.md and removes LICENSE.md
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Delete LICENSE.md
+        run: |
+          rm -f LICENSE.md
+
+      - name: Rename SETTINGS.md to README.md
+        run: |
+          if [ -f SETTINGS.md ]; then
+            mv README.md HELP.md
+            mv SETTINGS.md README.md
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add -A
+          git commit -m "Update README.md from SETTINGS.md" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
