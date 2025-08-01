@@ -2,13 +2,13 @@
 
 ### Setup
 
-- [**Edit**](.github/juxta-repo.txt) the repositories list.
+- [**Edit**](.github/juxta-repo.txt) the list or repositories to arrange.
 
 ### Actions
 
-- [**Arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed.
+- [**Arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed into the [**repository/**](repository/) directory.
  
-- [**Clear**](.github/workflows/juxta-repo-clear.yml) deletes the cloned repositories.
+- [**Clear**](.github/workflows/juxta-repo-clear.yml) deletes the [**repository/**](repository/) directory.
 
 ### Configure
 
