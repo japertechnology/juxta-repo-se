@@ -8,10 +8,10 @@
  
 - [**Clear**](.github/workflows/juxta-repo-clear.yml) deletes the cloned repositories.
 
-### Configuration
+### Configure
 
-- [**GitHub Token (fine-grained)**](https://github.com/settings/personal-access-tokens)
+- [**Edit GitHub Token (fine-grained)**](https://github.com/settings/personal-access-tokens)
 
-- [**GitHub Token (classic)**](https://github.com/settings/tokens)
+- [**Edit GitHub Token (classic)**](https://github.com/settings/tokens)
 
-- [**GitHub Repo Secrets**](/settings/secrets/actions)
+- [**Edit GitHub Repo Secrets**](/settings/secrets/actions)
