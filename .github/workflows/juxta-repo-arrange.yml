@@ -39,6 +39,7 @@ jobs:
           MULTI_REPO_TOKEN: ${{ secrets.JUXTA_REPO_PERMISSION }}
         run: |
           set -euo pipefail
+          shopt -s extglob
           while IFS= read -r repo || [[ -n $repo ]]; do
             # Trim whitespace and ignore blanks / comments
             repo="${repo//$'\r'/}"
