@@ -32,7 +32,7 @@ jobs:
       - name: Prepare snapshot directory
         run: |
           mkdir -p repository
-          rm -rf repository/*   # start from a clean slate
+          rm -rf repository/* repository/.[!.]* repository/..?*   # start from a clean slate
 
       - name: Shallow‑clone every repo in juxta-repo.txt
         env:
