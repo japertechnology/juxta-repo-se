@@ -17,7 +17,7 @@ jobs:
       - name: Rename SETTINGS.md to README.md
         run: |
           if [ -f SETTINGS.md ]; then
-            mv README.md HELP.md
+            [ -f README.md ] && mv README.md HELP.md
             mv SETTINGS.md README.md
           fi
 
