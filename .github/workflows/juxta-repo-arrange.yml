@@ -67,7 +67,7 @@ jobs:
 
       # 5 – Strip Git metadata so only a snapshot remains
       - name: Remove Git metadata from clones
-        run: rm -rf repository/*/.git
+        run: find repository -name .git -type d -prune -exec rm -rf '{}' +
 
       # 6 – Commit the fresh snapshots back to this repo
       - name: Commit cloned repos
