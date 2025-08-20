@@ -8,7 +8,7 @@ Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) 
 
 ## Instructions
 
-[**.github/juxta-repo,txt**](.github/juxta-repo.txt) contains the list of repositories to arrange, each on its own line using the format: `owner/repository` and when committed arrangements will be made.
+[**.github/juxta-repo.txt**](.github/juxta-repo.txt) contains the list of repositories to arrange, each on its own line using the format: `owner/repository` and when committed arrangements will be made.
 
 [**.github/workflows/juxta-repo-arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed in `.github/juxta-repo.txt` file into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
  
