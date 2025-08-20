@@ -20,8 +20,12 @@ def sort_blocks():
         read_me = read_me_file.read()
 
     # Separating the 'table of contents' from the contents (blocks)
-    table_of_contents = ''.join(read_me.split('- - -')[0])
-    blocks = ''.join(read_me.split('- - -')[1]).split('\n# ')
+    toc, sep, remainder = read_me.partition('- - -')
+    if not sep:
+        print("Delimiter '- - -' not found; skipping sort_blocks")
+        return
+    table_of_contents = toc
+    blocks = remainder.split('\n# ')
     for i in range(len(blocks)):
         if i == 0:
             blocks[i] = blocks[i] + '\n'
