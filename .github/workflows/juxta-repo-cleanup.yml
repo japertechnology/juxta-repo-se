@@ -28,7 +28,12 @@ jobs:
 
       - name: Remove repository directory
         run: |
-          rm -rf repository
+          if [ -d repository ] && ! [ -L repository ]; then
+            rm -rf repository
+          else
+            echo "Safety check failed: repository must exist and not be a symlink."
+            exit 1
+          fi
 
       - name: Commit and push changes
         run: |
