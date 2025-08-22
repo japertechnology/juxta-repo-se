@@ -41,3 +41,7 @@ The [**10 top educational GitHub repositories**](.github/juxta-repo.txt) are cur
 ##### [Public APIs](https://github.com/public-apis/public-apis) A collective list of free APIs for development across various domains, including weather, sports, and data.
 
 ##### [Exercism](https://github.com/exercism) An open-source platform offering coding exercises and mentorship in over 70 programming languages. It provides a hands-on approach to learning.
+
+## License of Included Repositories
+
+The [repository](repository/) directory contains snapshots of external projects. Each subdirectory preserves the original project's license file. Please consult and adhere to those licenses before reusing or redistributing any contents.
