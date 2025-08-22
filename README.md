@@ -1,6 +1,6 @@
 # [**juxta-repo**](https://github.com/japertechnology/juxta-repo)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![AI](https://img.shields.io/badge/Assisted-Development-2b2bff?logo=openai&logoColor=white) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![AI](https://img.shields.io/badge/Assisted-Development-2b2bff?logo=openai&logoColor=white)
 
 Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) repositories, places them [**side-by-side**](repository/), static and untouched, enabling analysis and comparison without merging or preserving history.
 
