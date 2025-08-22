@@ -20,27 +20,27 @@ After forking you may [**.github/workflows/juxta-repo-cleanup**](.github/workflo
 
 ## Demonstration
 
-The [**10 top educational GitHub repositories**](.github/juxta-repo.txt) are currently arranged in the [**repository**](repository/).
+The repositories listed in [**.github/juxta-repo.txt**](.github/juxta-repo.txt) are currently arranged in the [**repository**](repository/).
 
 ##### [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp) A nonprofit offering a comprehensive curriculum covering web development, data science, and more. It includes thousands of coding challenges, projects, and certifications.
 
-##### [free-programming-books](https://github.com/EbookFoundation/free-programming-books) A massive collection of free programming books in over 30 languages, curated by the Free Ebook Foundation. It covers a wide range of programming topics and languages.
+##### [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x) A curated list of tutorials for building your own technology like databases, operating systems, and more.
 
-##### [Coding Interview University](https://github.com/jwasham/coding-interview-university) A self-study plan for software engineering interviews, covering computer science fundamentals, algorithms, and system design.
+##### [Awesome](https://github.com/sindresorhus/awesome) A collaborative list of awesome lists, covering programming, technology, and many other topics.
+
+##### [free-programming-books](https://github.com/EbookFoundation/free-programming-books) A massive collection of free programming books in over 30 languages, curated by the Free Ebook Foundation.
 
 ##### [Developer Roadmap](https://github.com/kamranahmedse/developer-roadmap) Visual roadmaps outlining the path to becoming a developer in various fields, including frontend, backend, and DevOps.
 
+##### [Coding Interview University](https://github.com/jwasham/coding-interview-university) A self-study plan for software engineering interviews, covering computer science fundamentals, algorithms, and system design.
+
 ##### [System Design Primer](https://github.com/donnemartin/system-design-primer) A comprehensive guide to system design, including concepts, interview questions, and real-world examples.
 
-##### [The Algorithms](https://github.com/TheAlgorithms/Python) A collection of algorithms implemented in Python, covering topics from basic to advanced levels. It's a great resource for learning and practicing algorithms.
+##### [996.ICU](https://github.com/996icu/996.ICU) A protest against the "996" work schedule in China (9 am to 9 pm, six days a week), advocating for labor rights.
 
-##### [Awesome Learning Resources](https://github.com/lauragift21/awesome-learning-resources) A curated list of learning resources, including tutorials, courses, and books, across various programming languages and topics.
+##### [Awesome Python](https://github.com/vinta/awesome-python) A curated list of awesome Python frameworks, libraries, software, and resources.
 
-##### [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) An in-depth series of books on JavaScript, exploring the language's core mechanisms and concepts.
-
-##### [Public APIs](https://github.com/public-apis/public-apis) A collective list of free APIs for development across various domains, including weather, sports, and data.
-
-##### [Exercism](https://github.com/exercism) An open-source platform offering coding exercises and mentorship in over 70 programming languages. It provides a hands-on approach to learning.
+##### [React](https://github.com/facebook/react) A JavaScript library for building user interfaces, maintained by Facebook and a community of developers.
 
 ## License of Included Repositories
 
