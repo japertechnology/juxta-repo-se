@@ -36,11 +36,7 @@ The repositories listed in [**.github/juxta-repo.txt**](.github/juxta-repo.txt) 
 
 ##### [System Design Primer](https://github.com/donnemartin/system-design-primer) A comprehensive guide to system design, including concepts, interview questions, and real-world examples.
 
-##### [996.ICU](https://github.com/996icu/996.ICU) A protest against the "996" work schedule in China (9 am to 9 pm, six days a week), advocating for labor rights.
-
 ##### [Awesome Python](https://github.com/vinta/awesome-python) A curated list of awesome Python frameworks, libraries, software, and resources.
-
-##### [React](https://github.com/facebook/react) A JavaScript library for building user interfaces, maintained by Facebook and a community of developers.
 
 ## License of Included Repositories
 
