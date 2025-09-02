@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/juxta-repo.txt'
+  schedule:
+    - cron: '0 0 * * 0' # weekly refresh
   workflow_dispatch:
 
 permissions:
