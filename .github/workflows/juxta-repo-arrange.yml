@@ -1,6 +1,8 @@
 name: juxta-repo-arrange
 
 on:
+  schedule:
+    - cron: '0 0 * * 0'
   push:
     paths:
       - '.github/juxta-repo.txt'
@@ -29,10 +31,17 @@ jobs:
           if command -v dos2unix &> /dev/null; then dos2unix .github/juxta-repo.txt
           else sed -i 's/\r$//' .github/juxta-repo.txt; fi
 
-      - name: Prepare snapshot directory
+      - name: Archive previous snapshot
         run: |
+          if [ -d repository ] && ! [ -L repository ]; then
+            ts=$(date -u +"%Y%m%d%H%M%S")
+            mkdir -p snapshots
+            mv repository "snapshots/$ts"
+          fi
           mkdir -p repository
           [ -d repository ] && ! [ -L repository ] || { echo "Safety check failed"; exit 1; }
+      - name: Prepare snapshot directory
+        run: |
           rm -rf repository/* repository/.[!.]* repository/..?*   # start from a clean slate
 
       - name: Validate repository list
@@ -49,12 +58,18 @@ jobs:
       - name: Remove Git metadata from clones
         run: find repository -name .git -type d -prune -exec rm -rf '{}' +
 
+      - name: Prune old snapshots
+        env:
+          RETENTION_DAYS: 90
+        run: scripts/prune-snapshots.sh
+
       # 6 – Commit the fresh snapshots back to this repo
       - name: Commit cloned repos
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add repository
+          git add -f repository
+          [ -d snapshots ] && git add snapshots
           if git diff --cached --quiet; then
             echo "✨ No changes to commit"
           else
