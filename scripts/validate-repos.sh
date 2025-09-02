@@ -8,8 +8,10 @@ MAX_SIZE="${MAX_REPO_SIZE_KB:-}"
 TOKEN="${MULTI_REPO_TOKEN:-${GITHUB_TOKEN:-}}"
 
 failed=0
+lineno=0
 
 while IFS= read -r line || [[ -n $line ]]; do
+  lineno=$((lineno + 1))
   line="${line//$'\r'/}"
   line="${line##*( )}"
   line="${line%%*( )}"
@@ -22,7 +24,7 @@ while IFS= read -r line || [[ -n $line ]]; do
     owner="${line%%/*}"
     repo="${line##*/}"
   else
-    echo "Invalid repository format: $line" >&2
+    echo "Line $lineno: invalid repository format '$line'" >&2
     failed=1
     continue
   fi
@@ -34,7 +36,7 @@ while IFS= read -r line || [[ -n $line ]]; do
       [[ "$o" == "$owner" ]] && allowed_ok=1 && break
     done
     if [[ $allowed_ok -eq 0 ]]; then
-      echo "Owner '$owner' is not in allowlist" >&2
+      echo "Line $lineno: owner '$owner' is not in allowlist" >&2
       failed=1
       continue
     fi
@@ -43,14 +45,14 @@ while IFS= read -r line || [[ -n $line ]]; do
   if [[ -n "$TOKEN" ]]; then
     api_url="https://api.github.com/repos/$owner/$repo"
     resp=$(curl -fsSL -H "Authorization: Bearer $TOKEN" "$api_url") || {
-      echo "Repository $owner/$repo not found or inaccessible" >&2
+      echo "Line $lineno: repository $owner/$repo not found or inaccessible" >&2
       failed=1
       continue
     }
     if [[ -n "$MAX_SIZE" ]]; then
       size=$(echo "$resp" | grep -oE '"size":\s*[0-9]+' | head -1 | grep -oE '[0-9]+')
       if [[ -n "$size" && "$size" -gt "$MAX_SIZE" ]]; then
-        echo "Repository $owner/$repo size ${size}KB exceeds limit ${MAX_SIZE}KB" >&2
+        echo "Line $lineno: repository $owner/$repo size ${size}KB exceeds limit ${MAX_SIZE}KB" >&2
         failed=1
       fi
     fi

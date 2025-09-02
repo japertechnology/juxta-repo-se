@@ -1,0 +1,28 @@
+name: juxta-repo-validate
+
+on:
+  push:
+    paths:
+      - '.github/juxta-repo.txt'
+  pull_request:
+    paths:
+      - '.github/juxta-repo.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+
+      - name: Validate repository list
+        run: scripts/validate-repos.sh .github/juxta-repo.txt
