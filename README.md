@@ -10,6 +10,8 @@ Captures the latest GitHub snapshots of [**specified**](.github/juxta-repo.txt) 
 
 [**.github/juxta-repo.txt**](.github/juxta-repo.txt) contains the list of repositories to arrange, each on its own line using the format: `owner/repository` and when committed arrangements will be made.
 
+[**scripts/validate-repos.sh**](scripts/validate-repos.sh) verifies that every non-comment line uses either `owner/repository` or a full `https://github.com/owner/repository` URL. The [**juxta-repo-validate**](.github/workflows/juxta-repo-validate.yml) workflow runs this check and reports the line number of any malformed entry. You can run the script locally with `scripts/validate-repos.sh .github/juxta-repo.txt` before committing.
+
 [**.github/workflows/juxta-repo-arrange**](.github/workflows/juxta-repo-arrange.yml) clones the repositories listed in `.github/juxta-repo.txt` file into a fresh `repository/` directory. Each target repository appears as a subfolder holding a snapshot of its files with no Git history.
  
 [**.github/workflows/juxta-repo-clear**](.github/workflows/juxta-repo-clear.yml) deletes the `repository/` directory.
