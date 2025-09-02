@@ -35,6 +35,11 @@ jobs:
           [ -d repository ] && ! [ -L repository ] || { echo "Safety check failed"; exit 1; }
           rm -rf repository/* repository/.[!.]* repository/..?*   # start from a clean slate
 
+      - name: Validate repository list
+        env:
+          MULTI_REPO_TOKEN: ${{ secrets.JUXTA_REPO_PERMISSION }}
+        run: scripts/validate-repos.sh .github/juxta-repo.txt
+
       - name: Shallow‑clone every repo in juxta-repo.txt
         env:
           MULTI_REPO_TOKEN: ${{ secrets.JUXTA_REPO_PERMISSION }}
