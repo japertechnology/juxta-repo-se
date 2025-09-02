@@ -41,6 +41,9 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s extglob
+          echo "::add-mask::${MULTI_REPO_TOKEN}"
+
+          ESCAPED_TOKEN=$(printf '%s\n' "${MULTI_REPO_TOKEN}" | sed 's/[\\\/&]/\\&/g')
 
           export GIT_ASKPASS="$(mktemp)"
           cat > "$GIT_ASKPASS" <<'EOF'
@@ -70,7 +73,7 @@ EOF
             target="repository/$(basename "$url" .git)"
             echo "➤ Cloning $url → $target"
             if ! output=$(git clone --depth 1 "$url" "$target" 2>&1); then
-              echo "$output" | sed 's/'"$MULTI_REPO_TOKEN"'/[REDACTED]/g' >&2
+              echo "$output" | sed "s/${ESCAPED_TOKEN}/[REDACTED]/g" >&2
               echo "❌ Failed to clone $repo" >&2
               continue
             fi
