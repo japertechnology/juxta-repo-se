@@ -1,0 +1,12 @@
+/repository/
+/HELP.md
+# Dependencies
+node_modules/
+# Build outputs
+build/
+dist/
+# Temporary files
+*.log
+*.tmp
+*.swp
+.DS_Store
